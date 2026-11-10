@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Disclaimer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@500;700&display=block" rel="stylesheet">
+<style>
+:root { --paper:#f3ead6; --paper2:#e6d4ae; --ink:#2b2118; --muted:#5f4f3c; --red:#8c2320; --gold:#7a5c1e; --goldl:#b8912e; --line:#cdb88c; }
+* { box-sizing:border-box; }
+html,body { margin:0; width:1080px; height:1350px; overflow:hidden; }
+body { background:radial-gradient(ellipse at 50% 30%, #f9f2e2 0%, var(--paper) 50%, var(--paper2) 100%); color:var(--ink); position:relative; display:flex; flex-direction:column; padding:92px 104px 80px; }
+body::before { content:""; position:absolute; inset:18px; border:2px solid var(--line); }
+body::after { content:""; position:absolute; inset:26px; border:1px solid var(--line); }
+header { text-align:center; margin-bottom:40px; }
+.eb { font-family:Cinzel,serif; font-weight:700; letter-spacing:.32em; color:var(--gold); font-size:22px; }
+h1 { font-family:Cinzel,serif; font-weight:900; color:var(--red); font-size:72px; margin:12px 0 8px; letter-spacing:.03em; }
+.sub { font-family:Alegreya,serif; font-style:italic; color:var(--muted); font-size:28px; }
+.orn { display:flex; align-items:center; justify-content:center; gap:18px; margin:30px auto 0; width:420px; }
+.orn span { flex:1; height:1.5px; background:var(--goldl); }
+.orn i { width:12px; height:12px; background:var(--goldl); transform:rotate(45deg); }
+.txt { font-family:Alegreya,serif; font-size:33px; line-height:1.5; hyphens:none; text-wrap:pretty; }
+.txt p { margin:0 0 26px; }
+.txt p:first-child::first-letter { font-family:Cinzel,serif; font-weight:900; color:var(--red); font-size:84px; float:left; line-height:.86; margin:8px 14px 0 0; }
+.box { margin-top:auto; background:rgba(255,255,255,.5); border:1.5px solid var(--line); border-left:12px solid var(--red); border-radius:14px; padding:24px 30px; font-family:Alegreya,serif; font-size:30px; line-height:1.45; color:var(--ink); text-wrap:pretty; }
+.credit { position:absolute; bottom:38px; left:0; right:0; text-align:center; font-family:Alegreya,serif; font-size:21px; color:var(--muted); }
+</style></head><body>
+<header>
+  <div class="eb">THE QUEEN'S DILEMMA</div>
+  <h1>Disclaimer</h1>
+  <div class="sub">aus dem Regelheft, im Original</div>
+  <div class="orn"><span></span><i></i><span></span></div>
+</header>
+<div class="txt">
+  <p>This game is set in a fictional and often cruel fantasy world. It was designed to put you in front of morally challenging situations and tough choices. Many of the dilemmas you will face involve ethical and moral choices related to sensitive topics that could upset your sensitivity or that of the people playing with you, such as injustice, violence, slavery, and discrimination. By design, the game will occasionally put you in front of the uncomfortable choice between what you think is right, and what is best for winning. Remember that this is just a game, and you’re playing as fictional characters, but make sure all players at the table feel comfortable with the themes involved. Even if the game world follows elements of the real world, nothing should be taken as real.</p>
+</div>
+<div class="box">None of the atrocities described in The Queen’s Dilemma are in any way promoted, encouraged, or even considered as acceptable by the publisher, designers, scriptwriters, nor the distributors of this game.</div>
+<div class="credit">Rulebook v15, p. 1 · © Horrible Games SRL · unofficial reproduction</div>
+<script>
+document.fonts.ready.then(() => { const d = document.body.scrollHeight - document.body.clientHeight; if (location.hash === '#check') document.title = d > 1 ? 'OVER' + d : 'OK'; });
+</script>
+</body></html>

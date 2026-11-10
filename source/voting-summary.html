@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Die Abstimmung – kurz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 210mm 297mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --aye: #1f4f8a; --nay: #a3271f; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; color: var(--ink); font-family: "Alegreya Sans", sans-serif; font-size: 10.1pt; line-height: 1.34; background: var(--paper); }
+.page { width: 210mm; height: 297mm; padding: 11mm 12mm 10mm; position: relative; overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 30%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page::before { content: ""; position: absolute; inset: 5mm; border: .7pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+header { display: flex; align-items: baseline; justify-content: space-between; border-bottom: .9pt solid var(--goldl); padding-bottom: 2mm; margin-bottom: 2.8mm; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .26em; font-size: 7.6pt; color: var(--gold); font-weight: 700; }
+h1 { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 21pt; margin: .6mm 0 0; line-height: 1; }
+.tag { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 10.5pt; text-align: right; }
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin-bottom: 3mm; }
+.flow div { background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-radius: 2mm; padding: 1.6mm 2mm 1.8mm; font-size: 8.6pt; line-height: 1.22; color: var(--muted); }
+.flow b { display: flex; align-items: center; gap: 1.6mm; font-family: Cinzel, serif; font-size: 8.6pt; color: var(--ink); margin-bottom: .6mm; }
+.flow i { font-style: normal; width: 5mm; height: 5mm; border-radius: 50%; background: var(--gold); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 7.6pt; flex: none; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; flex: 1; }
+.col { display: flex; flex-direction: column; }
+h2 { font-family: Cinzel, serif; font-size: 10.6pt; color: var(--red); margin: 0 0 1.2mm; letter-spacing: .03em; }
+h2 small { font-family: Alegreya, serif; font-style: italic; font-weight: 400; color: var(--muted); font-size: 9pt; letter-spacing: 0; margin-left: 1.4mm; }
+section { margin-bottom: 2.5mm; }
+ul { margin: 0; padding-left: 4mm; } li { margin: 0 0 .9mm; }
+p { margin: 0 0 1.2mm; }
+.t { font-weight: 800; color: var(--red); }
+.aye { color: var(--aye); font-weight: 800; } .nay { color: var(--nay); font-weight: 800; }
+.rule { display: grid; grid-template-columns: 24mm 1fr; gap: 2mm; padding: 1mm 0; border-bottom: .5pt dotted var(--line); }
+.rule:last-child { border-bottom: 0; }
+.rule > b { font-family: Cinzel, serif; font-size: 8.2pt; color: var(--red); padding-top: .2mm; }
+.rule.sub { margin-left: 3mm; padding-left: 2.4mm; border-left: 1.2pt solid var(--goldl); grid-template-columns: 22mm 1fr; }
+.rule > b em { display: block; font-family: Alegreya, serif; font-style: italic; font-weight: 400; font-size: 8pt; color: var(--muted); letter-spacing: 0; margin-top: .3mm; }
+.box { background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-radius: 2mm; padding: .6mm 2.6mm; }
+.key { background: var(--red); color: #fbf3e2; border-radius: 2mm; padding: 2mm 3mm; }
+.key b { color: #f6d98f; font-family: Cinzel, serif; font-size: 8.8pt; }
+.warn { border-left: 1.2mm solid var(--red); background: rgba(255,255,255,.5); border-radius: 0 2mm 2mm 0; padding: 1.6mm 2.6mm; }
+.warn b { color: var(--red); }
+ol.st { margin: 0; padding-left: 4.6mm; } ol.st li { margin-bottom: .8mm; }
+footer { text-align: center; font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 8.6pt; margin-top: 1mm; }
+.flow div { font-size: 9pt; } .flow b { font-size: 9.2pt; }
+h2 { font-size: 11.4pt; } .rule > b { font-size: 8.8pt; } .rule { grid-template-columns: 25mm 1fr; } .rule.sub { grid-template-columns: 23mm 1fr; }
+.key b { font-size: 9.4pt; }
+.tips { background: rgba(255,255,255,.55); border: .8pt solid var(--goldl); border-radius: 2mm; padding: 2.2mm 3mm 1.6mm; }
+.tips h2 { margin-bottom: 1.6mm; }
+.tips ol { margin: 0; padding: 0; list-style: none; counter-reset: t; }
+.tips li { counter-increment: t; position: relative; padding-left: 6.4mm; margin-bottom: 1.5mm; }
+.tips li::before { content: counter(t); position: absolute; left: 0; top: .2mm; width: 4.6mm; height: 4.6mm; border-radius: 50%; background: var(--gold); color: #fff; font-family: Cinzel, serif; font-weight: 700; font-size: 7.6pt; display: flex; align-items: center; justify-content: center; }
+.grow { flex: 1; }
+.def { font-size: 9.6pt; line-height: 1.3; color: var(--muted); border-left: 1.2mm solid var(--goldl); background: rgba(255,255,255,.45); border-radius: 0 2mm 2mm 0; padding: 1.4mm 2.6mm; margin: -.6mm 0 3mm; }
+.def b { color: var(--ink); }
+.fn { color: var(--red); font-weight: 800; font-size: .8em; margin-left: .2mm; }
+.fnote { font-size: 8.8pt; line-height: 1.3; color: var(--muted); border-top: .6pt solid var(--goldl); padding-top: 1.6mm; margin-top: 2.4mm; }
+.fnote sup { color: var(--red); font-weight: 800; }
+.fnote b { color: var(--ink); }
+.warn { margin-top: .4mm; margin-bottom: 2.5mm; } .warn b { font-family: Cinzel, serif; font-size: 9.4pt; }
+.credit { position: absolute; bottom: 6.1mm; left: 0; right: 0; text-align: center; font-size: 6.3pt; color: var(--muted); }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="eyebrow">THE QUEEN'S DILEMMA</div><h1>Die Abstimmung</h1></div>
+    <div class="tag">Spielhilfe auf einen Blick</div>
+  </header>
+
+  <div class="flow">
+    <div><b><i>1</i>Vorlesen</b>Das Dilemma und seine möglichen Folgen</div>
+    <div><b><i>2</i>Abstimmen</b>Vote oder Pass, feilschen</div>
+    <div><b><i>3</i>Auswerten</b>Welche Seite gewinnt, wer Leader ist</div>
+    <div><b><i>4</i>Umdrehen</b>Die Rückseite zeigt, was geschieht</div>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2>1 · Vorlesen</h2>
+        <p>Das Dilemma wird vorgelesen, dazu was bei <span class="aye">Aye</span> und bei <span class="nay">Nay</span> vorrückt. Achte auf <b>Keywords</b>: Steht eines davon in deinem Diary, trifft die Folge dich persönlich. Die Rückseite kann mehr bringen, als vorne steht.</p>
+      </section>
+
+      <section>
+        <h2>2 · Abstimmen <small>ab dem Leader im Uhrzeigersinn, auch mehrmals</small></h2>
+        <p>Bei deinem <b>ersten Zug</b>: Vote oder Pass.</p>
+        <div class="box">
+          <div class="rule"><b>Vote</b><span>1 oder mehr Power auf dein Voting tile: blau <span class="aye">Aye</span>, rot <span class="nay">Nay</span>.</span></div>
+          <div class="rule"><b>Raise / Stay</b><span>Später nachlegen oder abwarten. Seite wechseln oder passen geht nicht mehr.</span></div>
+          <div class="rule"><b>Pass</b><span>Du bist für diese Abstimmung draussen und wählst <b>genau 1 Pass Action</b>, dazu 1 Pass Bonus, falls es einen gibt.</span></div>
+          <div class="rule sub"><b>Gather Power</b><span>Nach der Abstimmung teilt ihr euch den Topf zu gleichen Teilen.</span></div>
+          <div class="rule sub"><b>Become Moderator</b><span>Du entscheidest ab jetzt jeden Gleichstand. Pro Abstimmung kann das nur einer wählen.</span></div>
+          <div class="rule sub"><b>Special Pass Action<em>nur wenn freigeschaltet</em></b><span>Steht auf einer Chronicle card, Event card oder einem Skill sticker. Jede kann pro Abstimmung nur einer nutzen.</span></div>
+        </div>
+      </section>
+
+      <section class="key">
+        <b>Leader token</b> · Hast du am Ende deines Zugs <u>allein</u> am meisten Power auf deinem Tile, nimmst du ihn sofort, egal für welche Seite. <b>Die Abstimmung endet nach dem Zug des Spielers rechts vom Leader.</b> Jeder neue Leader schiebt das Ende also hinaus.
+      </section>
+
+      <section style="margin-top:2.5mm">
+        <h2>Feilschen</h2>
+        <ul>
+          <li>Ressourcen gibt es nur <b>gegen eine Gegenleistung</b>: eine Stimme, einen Pass, den Entscheid des Moderators.</li>
+          <li>Bindend, sobald die Ressourcen angenommen sind. Versprechen ohne Ressourcen binden nicht.</li>
+          <li><b class="t">Verboten:</b> Ressourcen gegen Ressourcen, Power weitergeben, Leader oder Moderator token handeln.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2>3 · Auswerten</h2>
+        <ul>
+          <li><b>Mehr Power gewinnt.</b> Bei Gleichstand entscheidet der Moderator.</li>
+          <li><b>Alle gepasst:</b> Der Moderator entscheidet und wird Leader.</li>
+          <li><b>Leader verliert:</b> Der Leader token geht an den Gewinner mit der meisten Power.</li>
+        </ul>
+      </section>
+
+      <section class="key">
+        <b>Gewinnen kostet, Verlieren ist gratis.</b> Gewinner zahlen ihre Power in den Topf, Verlierer bekommen sie zurück. Wer Gather Power gewählt hat, teilt sich den Topf, <u>bevor</u> die Gewinner einzahlen.
+      </section>
+
+      <section style="margin-top:2.5mm">
+        <h2>4 · Umdrehen</h2>
+        <p>Die Karte wird umgedreht, und die Rückseite der Siegerseite wird vorgelesen: Schieber rücken vor, jede siegreiche Ideologie bekommt einen Hegemony token, Keywords treffen einzelne Häuser, manchmal geht ein Umschlag auf. <b>Viele Folgen treffen den Leader</b>, gute wie schlechte.</p>
+        </section>
+
+      <section class="warn"><b>Ende des Spiels<sup class="fn">*</sup>:</b> Ab dem siebten Dilemma kann jedes das letzte sein. Nach dem neunten ist Schluss.</section>
+
+      <section class="tips grow">
+        <h2>Tipps</h2>
+        <ol>
+          <li><b>Power ist dein Budget für dieses Spiel<sup class="fn">*</sup>.</b> Du bekommst zu Beginn jedes Spiels 7. Neue gibt es danach fast nur über Gather Power und manche Kartenfolgen. Wer früh alles setzt, schaut später zu.</li>
+          <li><b>Übrige Power zählt am Ende des Spiels<sup class="fn">*</sup>:</b> die meiste bringt 2 Independence, die zweitmeiste 1. Danach verfällt sie, ins nächste Spiel nimmst du keine mit.</li>
+          <li><b>Gather Power lohnt, wenn der Topf voll ist.</b> Er wächst um alles, was die Gewinner einzahlen. Je weniger Gather Power wählen, desto mehr bekommt jeder.</li>
+          <li><b>Gewinnen, ohne Leader zu sein:</b> Leg weniger als der Höchste auf deiner Seite. Dann trägt er die Folgen.</li>
+          <li><b>Jeder Sieg deiner Favored-Ideologie zählt</b>, auch wenn sie am Ende nicht vorne liegt: Jeder Hegemony token bei ihr ist 1 Punkt für dich.</li>
+          <li><b>Der Moderator ist käuflich.</b> Bei Gleichstand entscheidet er allein, und seinen Entscheid darf man ihm mit Ressourcen abkaufen.</li>
+        </ol>
+      <div class="credit">Inoffizielles Fan-Hilfsblatt, vom Verlag nicht geprüft. Basis: Regelheft v15. The Queen's Dilemma © Horrible Games SRL.</div>
+</section>
+    </div>
+  </div>
+  <div class="fnote"><sup>*</sup> <b>Spiel</b> heisst hier immer eine Partie mit 7 bis 9 Dilemmas, jedes mit einer Abstimmung. <b>Die Kampagne</b> sind alle 14 bis 18 Spiele zusammen. Power gilt nur für ein Spiel, Ressourcen und Punkte bleiben über die ganze Kampagne.</div>
+</div>
+<script>
+document.fonts.ready.then(() => {
+  const p = document.querySelector('.page'); const d = p.scrollHeight - p.clientHeight;
+  const cols = [...document.querySelectorAll('.col')].map(c => c.scrollHeight - c.clientHeight);
+  if (location.hash === '#check') document.title = (d > 1 || cols.some(x => x > 1)) ? 'OVER' + d + '/' + cols.join(',') : 'OK';
+});
+</script>
+</body></html>

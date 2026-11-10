@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Wähle deine Figur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 100mm 178mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Alegreya Sans", "DejaVu Sans", sans-serif; font-size: 10.6pt; line-height: 1.36; }
+.page { width: 100mm; height: 178mm; padding: 9mm 8mm 10mm; position: relative; overflow: hidden; break-after: page; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 35%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page:last-child { break-after: auto; }
+.page::before { content: ""; position: absolute; inset: 3.5mm; border: 0.6pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+.folio { position: absolute; bottom: 5.2mm; left: 0; right: 0; text-align: center; font-family: Cinzel, serif; font-size: 6.5pt; letter-spacing: .18em; color: var(--muted); }
+h1, h2, h3 { font-family: Cinzel, serif; margin: 0; }
+h2 { font-size: 14.5pt; color: var(--red); letter-spacing: .03em; line-height: 1.12; font-weight: 700; }
+h2 + .sub { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 10.5pt; margin: 1mm 0 3.4mm; line-height: 1.25; }
+p { margin: 0 0 2.2mm; }
+b { font-weight: 700; }
+.t { font-weight: 800; color: var(--red); }
+ul, ol { margin: 0 0 2.2mm; padding-left: 4.6mm; } li { margin: 0 0 1.2mm; }
+.box { background: rgba(255,255,255,.5); border: 0.6pt solid var(--line); border-radius: 2mm; padding: 2.6mm 3mm; margin: 0 0 2.6mm; }
+.key { background: var(--red); color: #fbf3e2; border-radius: 2mm; padding: 3mm 3.4mm; margin: 2mm 0 2.6mm; }
+.key b { color: #fff; }
+.key .big { font-family: Cinzel, serif; font-size: 10.2pt; font-weight: 700; display: block; margin-bottom: 1.2mm; color: #f6d98f; }
+.small { font-size: 9.8pt; line-height: 1.33; }
+.muted { color: var(--muted); }
+.push { margin-top: auto; }
+img { display: block; max-width: 100%; }
+
+.cover { text-align: center; justify-content: center; padding-bottom: 22mm; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .28em; font-size: 8pt; color: var(--gold); margin-top: 4mm; font-weight: 700; }
+.cover h1 { font-size: 23pt; line-height: 1.04; margin: 2.6mm 0 1.6mm; font-weight: 900; color: var(--red); }
+.tag { font-family: Alegreya, serif; font-style: italic; font-size: 11.5pt; color: var(--muted); margin-bottom: 4mm; }
+.cover .lead { text-align: left; font-family: Alegreya, serif; font-size: 11pt; line-height: 1.42; }
+.due { font-family: Cinzel, serif; font-weight: 700; color: var(--red); font-size: 11pt; margin: 3mm 0 1mm; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 2.4mm; width: 76mm; margin: 0 auto; }
+.grid a { color: inherit; text-decoration: none; }
+.grid .c img { border-radius: 1.4mm; border: .5pt solid var(--line); }
+.grid .n { font-family: Cinzel, serif; font-weight: 700; font-size: 8.8pt; color: var(--red); margin-top: .8mm; line-height: 1.15; }
+.grid .i { font-size: 8.6pt; color: var(--muted); line-height: 1.2; }
+
+.panel { border-radius: 1.8mm; border: .6pt solid var(--line); box-shadow: 0 .8mm 2.2mm rgba(60,40,10,.22); margin: 0 0 3mm; }
+.ctitle { font-family: Cinzel, serif; font-weight: 700; color: var(--red); font-size: 13pt; line-height: 1.1; }
+.ctitle span { display: block; font-family: Alegreya, serif; font-style: italic; font-weight: 400; color: var(--muted); font-size: 10pt; margin-top: .6mm; }
+.ide { display: flex; gap: 1.6mm; margin: 2mm 0 2.2mm; flex-wrap: wrap; }
+.ide span { font-family: Cinzel, serif; font-size: 7.8pt; font-weight: 700; letter-spacing: .06em; border: .7pt solid var(--goldl); color: var(--gold); border-radius: 3mm; padding: .5mm 2.2mm; background: rgba(255,255,255,.5); }
+.choose { border-left: 1.2mm solid var(--red); padding: 1.2mm 0 1.2mm 2.6mm; font-family: Alegreya, serif; font-size: 10.6pt; line-height: 1.38; margin: 0 0 2mm; }
+
+dl.id { margin: 0; font-size: 9.9pt; line-height: 1.3; }
+dl.id dt { font-family: Cinzel, serif; font-weight: 700; color: var(--red); font-size: 8.8pt; letter-spacing: .05em; margin-top: 1.8mm; }
+dl.id dd { margin: 0; }
+.emb { width: 44mm; margin: 0 auto 1mm; border-radius: 1.2mm; }
+.reply { font-family: Alegreya, serif; font-size: 12pt; line-height: 1.6; background: rgba(255,255,255,.6); border: .8pt dashed var(--goldl); border-radius: 2mm; padding: 3mm 4mm; margin: 2mm 0 3mm; }
+.sign { font-family: Alegreya, serif; font-style: italic; text-align: center; color: var(--muted); font-size: 10pt; }
+.credit { position: absolute; bottom: 9.5mm; left: 9mm; right: 9mm; text-align: center; font-family: "Alegreya Sans", sans-serif; font-size: 7pt; line-height: 1.3; color: var(--muted); }
+</style></head>
+<body>
+
+<!-- COVER -->
+<section class="page cover">
+  <div class="eyebrow">THE QUEEN'S DILEMMA</div>
+  <h1>Wähle<br>deine Figur</h1>
+  <div class="tag">Sechs Sitze im Rat der Königin</div>
+  <p class="lead">Jedes Haus im Rat wird von einer von sechs Figuren angeführt. Du spielst deine Figur die ganze Kampagne lang, alle 14 bis 18 Spiele. Jede Figur steht für zwei Ideologien und hat ihre eigene Geschichte, die sich über die Spiele entfaltet.</p>
+  <div class="credit">Inoffizielle Fan-Hilfe, vom Verlag nicht geprüft. Basis: Regelheft v15. The Queen's Dilemma, Bilder und Symbole © Horrible Games SRL.</div>
+  <div class="folio">I</div>
+</section>
+
+<!-- AESYAS -->
+<section class="page" id="aesyas">
+  <img class="panel" src="img/aesyas.jpg" alt="Aesyas, The Silver Quill">
+  <div class="ctitle">Aesyas<span>The Silver Quill · die silberne Feder</span></div>
+  <div class="ide"><span>Progress</span><span>Diplomacy</span></div>
+  <p>Mentor von Serena und einer der fortschrittlichsten und scharfsinnigsten Gelehrten des Reichs. Aesyas treibt das Reich seit Langem zu Reformen an.</p>
+  <p class="choose">Wähle Aesyas, wenn du das heikle Gleichgewicht zwischen Moral und Fortschritt ausloten willst und die Frage, wozu Wissenschaft da ist.</p>
+  <div class="folio">II</div>
+</section>
+
+<!-- ELINOR -->
+<section class="page" id="elinor">
+  <img class="panel" src="img/elinor.jpg" alt="Elinor, The Herald of the Past">
+  <div class="ctitle">Elinor<span>The Herald of the Past · die Heroldin der Vergangenheit</span></div>
+  <div class="ide"><span>Tradition</span><span>Order</span></div>
+  <p>Ihr Geschlecht ist so alt wie Ankist selbst. Allein ihr Name verschafft Elinor bleibenden Einfluss beim Adel und beim Kult.</p>
+  <p class="choose">Wähle Elinor, wenn du den Riss zwischen persönlichem Gewissen und politischer Pflicht ausloten willst und den Streit zwischen geistlichem und weltlichem Recht.</p>
+  <div class="folio">III</div>
+</section>
+
+<!-- JILIAN -->
+<section class="page" id="jilian">
+  <img class="panel" src="img/jilian.jpg" alt="Jilian, The Silk Weaver">
+  <div class="ctitle">Jilian<span>The Silk Weaver · der Seidenweber</span></div>
+  <div class="ide"><span>Diplomacy</span><span>Tradition</span></div>
+  <p>Ein aufstrebender Diplomat und Unterhändler, gewandt in Überredung, Intrige und Staatskunst. Er webt Worte und Ränke mit gleichem Geschick.</p>
+  <p class="choose">Wähle Jilian, wenn du dich durch die Intrigen des Hofes bewegen und die feine Kunst des Machtspiels meistern willst.</p>
+  <div class="folio">IV</div>
+</section>
+
+<!-- LYRIE -->
+<section class="page" id="lyrie">
+  <img class="panel" src="img/lyrie.jpg" alt="Lyrie, The Visionary Patron">
+  <div class="ctitle">Lyrie<span>The Visionary Patron · die visionäre Gönnerin</span></div>
+  <div class="ide"><span>Liberty</span><span>Progress</span></div>
+  <p>Eine visionäre Kulturikone und Gründerin des Freedomism, einer radikalen Kunstbewegung, die für ungehemmten Selbstausdruck eintritt.</p>
+  <p class="choose">Wähle Lyrie, wenn du dich mit freiem Denken befassen willst, mit der Frage, ob man das Werk vom Künstler trennen kann, und mit der Macht charismatischer Figuren.</p>
+  <div class="folio">V</div>
+</section>
+
+<!-- SYD -->
+<section class="page" id="syd">
+  <img class="panel" src="img/syd.jpg" alt="Syd, The Feral">
+  <div class="ctitle">Syd<span>The Feral · der Wilde</span></div>
+  <div class="ide"><span>Force</span><span>Liberty</span></div>
+  <p>Ein skrupelloser Adliger, tief verstrickt in die Unterwelt. Er traut niemandem und bewegt sich mit kalter Berechnung im Schatten.</p>
+  <p class="choose">Wähle Syd, wenn du in die Verbrechersyndikate eintauchen willst, mit Bandenkriegen, Verbrechen und dem Monopol auf Drogen.</p>
+  <div class="folio">VI</div>
+</section>
+
+<!-- XANTHE -->
+<section class="page" id="xanthe">
+  <img class="panel" src="img/xanthe.jpg" alt="Xanthe, The Crimson Shield">
+  <div class="ctitle">Xanthe<span>The Crimson Shield · der karmesinrote Schild</span></div>
+  <div class="ide"><span>Order</span><span>Force</span></div>
+  <p>Eine wilde Kriegerin, frisch in den Adelsstand erhoben, aus enkhalischem Geschlecht. Sie ist Königin Serenas engste Vertraute, ihre treueste Freundin und rechte Hand.</p>
+  <p class="choose">Wähle Xanthe, wenn dich soldatische Tugend, kulturelles Erbe und Integration reizen.</p>
+  <div class="folio">VII</div>
+</section>
+
+<!-- IDEOLOGIES -->
+<section class="page">
+  <h2>Die sechs Ideologien</h2>
+  <div class="sub">Wofür die Figuren einstehen</div>
+  <img class="emb" src="img/e1.jpg" alt="Tradition gegen Progress">
+  <dl class="id">
+    <dt>Tradition</dt><dd>Adel, Herkunft, Religion, Privilegien. Die Vergangenheit als Massstab.</dd>
+    <dt>Progress</dt><dd>Wissenschaft, Reformen, Erneuerung. Die Zukunft wird besser.</dd>
+  </dl>
+  <img class="emb" src="img/e2.jpg" alt="Force gegen Diplomacy" style="margin-top:2.4mm">
+  <dl class="id">
+    <dt>Force</dt><dd>Krieg, Stärke, Strafe. Macht setzt sich durch.</dd>
+    <dt>Diplomacy</dt><dd>Verhandlung, Verträge, Spionage, Kompromiss.</dd>
+  </dl>
+  <img class="emb" src="img/e3.jpg" alt="Order gegen Liberty" style="margin-top:2.4mm">
+  <dl class="id">
+    <dt>Order</dt><dd>Gesetz, Kontrolle, Hierarchie, eine starke Mitte.</dd>
+    <dt>Liberty</dt><dd>Selbstbestimmung, freie Rede, Föderalismus, Rebellion.</dd>
+  </dl>
+  <div class="folio">VIII</div>
+</section>
+
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>

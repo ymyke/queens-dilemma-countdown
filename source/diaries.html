@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Die Tagebücher</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 100mm 178mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Alegreya Sans", "DejaVu Sans", sans-serif; font-size: 10.6pt; line-height: 1.36; }
+.page { width: 100mm; height: 178mm; padding: 9mm 8mm 10mm; position: relative; overflow: hidden; break-after: page; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 35%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page:last-child { break-after: auto; }
+.page::before { content: ""; position: absolute; inset: 3.5mm; border: 0.6pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+.folio { position: absolute; bottom: 5.2mm; left: 0; right: 0; text-align: center; font-family: Cinzel, serif; font-size: 6.5pt; letter-spacing: .18em; color: var(--muted); }
+h1, h2 { font-family: Cinzel, serif; margin: 0; }
+p { margin: 0 0 2mm; }
+img { display: block; max-width: 100%; }
+
+.cover { text-align: center; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .28em; font-size: 8pt; color: var(--gold); margin-top: 3mm; font-weight: 700; }
+.cover h1 { font-size: 24pt; line-height: 1.04; margin: 2.4mm 0 1.4mm; font-weight: 900; color: var(--red); }
+.tag { font-family: Alegreya, serif; font-style: italic; font-size: 11.5pt; color: var(--muted); margin-bottom: 4mm; }
+.lead { text-align: left; font-family: Alegreya, serif; font-size: 10.8pt; line-height: 1.4; }
+.toc { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 2.4mm; margin: 2mm 0 0; text-align: left; }
+.toc a { display: grid; grid-template-columns: 8.4mm 1fr auto; grid-template-rows: auto auto; column-gap: 2mm; align-items: center; color: inherit; text-decoration: none;
+  background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-radius: 2mm; padding: 1.6mm 2mm; }
+.toc img { grid-row: 1 / 3; width: 8.4mm; }
+.toc b { font-family: Cinzel, serif; color: var(--red); font-size: 9.4pt; line-height: 1.1; }
+.toc i { font-style: normal; color: var(--muted); font-size: 8.6pt; line-height: 1.15; grid-column: 2; }
+.toc em { grid-row: 1 / 3; grid-column: 3; font-style: normal; font-family: Cinzel, serif; font-size: 8pt; color: var(--gold); }
+.note { font-size: 9.2pt; color: var(--muted); font-style: italic; margin-top: 3mm; text-align: left; line-height: 1.3; }
+
+.hero { display: flex; gap: 3.4mm; margin-bottom: 3mm; }
+.por { width: 31mm; height: 52.5mm; object-fit: cover; border-radius: 1.8mm; border: .6pt solid var(--line); box-shadow: 0 .8mm 2.2mm rgba(60,40,10,.25); flex: none; }
+.who { flex: 1; display: flex; flex-direction: column; min-width: 0; padding-top: .4mm; }
+.by { font-family: Cinzel, serif; font-size: 6.4pt; letter-spacing: .2em; color: var(--gold); font-weight: 700; text-transform: uppercase; }
+.pl { font-family: Cinzel, serif; font-weight: 900; font-size: 11.5pt; color: var(--ink); line-height: 1.1; margin-bottom: 2.6mm; }
+.crest { width: 9mm; margin-bottom: 1.4mm; }
+h2 { display: flex; align-items: baseline; gap: 1.4mm; font-size: 17pt; color: var(--red); font-weight: 900; line-height: 1; letter-spacing: .02em; }
+.dots { flex: 1; min-width: 0; border-bottom: 1.2pt dotted var(--muted); padding-bottom: .5mm; text-align: center; white-space: nowrap; font-family: Alegreya, serif; font-style: italic; font-weight: 400; font-size: 7pt; letter-spacing: 0; color: var(--muted); line-height: 1; }
+.ti { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 10.6pt; margin-top: .8mm; line-height: 1.15; }
+.ide { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2mm; margin-top: auto; }
+.ide span { display: inline-flex; align-items: center; gap: 1.2mm; font-family: Cinzel, serif; font-size: 7pt; font-weight: 700; letter-spacing: .06em; border: .7pt solid var(--goldl); color: var(--gold); border-radius: 3mm; padding: .4mm 2.2mm .4mm .8mm; background: rgba(255,255,255,.55); }
+.ide img { width: 4.2mm; height: 4.2mm; }
+
+blockquote { margin: 0 0 3mm; padding: 2mm 1mm; border-top: .6pt solid var(--goldl); border-bottom: .6pt solid var(--goldl); text-align: center;
+  font-family: Alegreya, serif; font-style: italic; font-size: 12pt; line-height: 1.25; color: var(--red); }
+blockquote::before { content: "“"; } blockquote::after { content: "”"; }
+.lab { font-family: Cinzel, serif; font-weight: 700; font-size: 7.6pt; letter-spacing: .16em; color: var(--gold); text-transform: uppercase; margin: 0 0 1.2mm; }
+.txt { font-family: Alegreya, serif; font-size: 10.2pt; line-height: 1.38; hyphens: auto; }
+.txt p:first-child::first-letter { font-family: Cinzel, serif; font-weight: 700; color: var(--red); }
+
+.run { display: flex; align-items: center; gap: 2mm; padding-bottom: 2mm; margin-bottom: 3.4mm; border-bottom: .6pt solid var(--line); }
+.run img { width: 6mm; }
+.run span { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 11pt; }
+.run i { font-family: Alegreya, serif; color: var(--muted); font-size: 9.6pt; margin-left: auto; }
+.queen { margin-top: 2.4mm; background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-left: 1.2mm solid var(--red); border-radius: 2mm; padding: 2.4mm 3mm 0.6mm; }
+</style></head>
+<body>
+
+<section class="page cover" style="justify-content:center;padding-bottom:16mm">
+  <div class="eyebrow">THE QUEEN'S DILEMMA</div>
+  <h1>Die Tage&shy;bücher</h1>
+  <div class="tag">Sechs Häuser, sechs Geschichten</div>
+  <p class="lead">Jede Figur hat ein eigenes Diary. Darin steht, was die Figur ausmacht, woher sie kommt und wie sie zur Königin steht. Lies deine eigene Figur vor dem ersten Spiel gründlich. Die anderen fünf lohnen sich auch, denn sie sitzen dir am Tisch gegenüber.</p>
+  <p class="lead">Hinter jedem Namen steht eine gepunktete Linie, wie im Diary. Dort kommt der Name deines Hauses hin. Überleg dir bis zum ersten Spiel einen, er wird dann eingetragen.</p>
+  <div class="toc">
+<a href="#aesyas"><img src="img/crest_aesyas.png"><b>Aesyas</b><em>2</em></a>
+<a href="#elinor"><img src="img/crest_elinor.png"><b>Elinor</b><em>4</em></a>
+<a href="#jilian"><img src="img/crest_jilian.png"><b>Jilian</b><em>6</em></a>
+<a href="#lyrie"><img src="img/crest_lyrie.png"><b>Lyrie</b><em>8</em></a>
+<a href="#syd"><img src="img/crest_syd.png"><b>Syd</b><em>10</em></a>
+<a href="#xanthe"><img src="img/crest_xanthe.png"><b>Xanthe</b><em>12</em></a>
+  </div>
+  <p class="note">Die Texte sind wörtlich aus den Diaries abgeschrieben und deshalb auf Englisch, wie das Spiel.</p>
+  <div class="folio">1 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+
+<section class="page" id="aesyas">
+  <div class="hero">
+    <img class="por" src="img/por_aesyas.jpg" alt="Aesyas">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_aesyas.png" alt="">
+      <h2><span>Aesyas</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Silver Quill</div>
+      <div class="ide"><span><img src="img/ico/progress.png">Progress</span><span><img src="img/ico/diplomacy.png">Diplomacy</span></div>
+    </div>
+  </div>
+  <blockquote>The trained mind can bend the future.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>As the kingdom’s most famous and respected scholar, your name is synonymous with intellect and discovery. Methodical, poised, and deeply pensive, you live for the thrill of new understanding, believing that only through relentless innovation and reason can a brighter future be forged. The secrets of both past and future captivate you, drawing you ever closer to knowledge that can unravel outdated values or lead to dangerous, yet necessary, truths. Those who cling to old superstitions and traditions strike you as weak, foolishly sentimental, and blind to progress. In your view, true power belongs to those who master their intellect, wielding it to illuminate the path forward.</p></div>
+  <div class="folio">2 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_aesyas.png" alt=""><span>Aesyas</span><i>The Silver Quill</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>Born into a noble family with a storied tradition of research and scholarship, you are deeply committed to the pursuit of knowledge, convinced that true greatness stems from the cultivation of the mind. Your relentless dedication has led you to amass an unparalleled library, known throughout the known world as the largest and most comprehensive collection of written works. Within these grand halls of learning, you command a circle of devoted scholars who work tirelessly under your guidance, uncovering the forgotten secrets of the world and pushing the boundaries of discovery.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>Appointed as young Serena’s tutor, you were tasked with tempering her undisciplined spirit. With patience, you guided her toward history, rhetoric, and strategy, hoping to shape her into a capable ruler. Initially, Serena resisted, preferring swordplay over scrolls, but she soon came to value your wisdom. Now, she trusts you implicitly, choosing you as a top advisor on her Council.</p></div></div>
+  <div class="folio">3 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page" id="elinor">
+  <div class="hero">
+    <img class="por" src="img/por_elinor.jpg" alt="Elinor">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_elinor.png" alt="">
+      <h2><span>Elinor</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Herald of the Past</div>
+      <div class="ide"><span><img src="img/ico/tradition.png">Tradition</span><span><img src="img/ico/order.png">Order</span></div>
+    </div>
+  </div>
+  <blockquote>Truth lies in blood.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>Your lineage is said to be as ancient as the kingdom itself. Throughout Ankist’s many trials, your bloodline has played a pivotal role, standing as a cornerstone of its history. Proud of your heritage, you are devoted to preserving your family’s legacy and securing its place in the new Ankist.</p><p>Resolute and steadfast, you view compromise as weakness, for your convictions are grounded in eternal truths. Revered by the Cult for your deep faith and devotion to ancestral wisdom, you stand as a guardian of the old ways, ensuring the past guides the kingdom’s future.</p><p>Your loyalty to tradition is more than a belief—it is a defining strength, shaping your influence and securing your place as a stalwart pillar of Ankist’s destiny.</p></div>
+  <div class="folio">4 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_elinor.png" alt=""><span>Elinor</span><i>The Herald of the Past</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>You share your family’s honor with your twin brother, Theon. Bound by a harsh upbringing where each of you was punished for the other’s misdeeds, you both learned to always have each other’s backs. Rash and impulsive, Theon chose the path of a valiant knight, leaving the command of the House to your calculated leadership. While he thrives on the battlefield, you navigate the complexities of power, ensuring that both of you uphold the legacy of your family.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>Queen Serena holds your family in high esteem, recognizing the enduring influence your name commands among the nobility. It was only fitting, then, that she chose you to serve on the Council, entrusted with the vital task of maintaining her rule in her absence. Your family’s legacy and influence are intertwined with the kingdom’s destiny, solidifying your place among the realm’s most powerful decision-makers.</p></div></div>
+  <div class="folio">5 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page" id="jilian">
+  <div class="hero">
+    <img class="por" src="img/por_jilian.jpg" alt="Jilian">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_jilian.png" alt="">
+      <h2><span>Jilian</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Silk Weaver</div>
+      <div class="ide"><span><img src="img/ico/diplomacy.png">Diplomacy</span><span><img src="img/ico/tradition.png">Tradition</span></div>
+    </div>
+  </div>
+  <blockquote>A silver tongue dulls the iron sword.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>You are mercurial and unpredictable, driven by your own interests and whims. You revel in being the center of attention, thriving on whispers and gossip—whether it’s praise or condemnation. A master of diplomacy and deception, you weave intricate webs of schemes, leaving even your closest allies questioning whether you have any coherent plan at all. To you, brute force is the tool of fools; the power of words can achieve far more, far better. Your position as a Councilor is a privilege you hold dear, and you cherish the grandeur of the past and and your Ankistan heritage, viewing it as far superior to the crude ways of the present.</p></div>
+  <div class="folio">6 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_jilian.png" alt=""><span>Jilian</span><i>The Silk Weaver</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>Hailing from an ancient lineage teetering on the brink of ruin, you restored your family’s fortunes through your unmatched skill in political negotiation. Now, as a secured Councilor, your focus shifts to building a vast network of spies, allowing you to grasp the intricate power structures of the court. With this web of influence, you will ensure that all who dwell within its halls—nobles and commoners alike—fall under your sway, cementing your control over the realm’s politics.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>During the turbulent Age of Disorder, your deft handling of diplomacy and intrigue was crucial in shielding the realm from countless threats. Recognizing your indispensable talents, Queen Serena has appointed you to the Council. Though she doesn’t fully trust you, your independent spirit, unpredictability, and undeniable charm have captivated her, making you both an asset and a mystery in her eyes.</p></div></div>
+  <div class="folio">7 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page" id="lyrie">
+  <div class="hero">
+    <img class="por" src="img/por_lyrie.jpg" alt="Lyrie">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_lyrie.png" alt="">
+      <h2><span>Lyrie</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Visionary Patron</div>
+      <div class="ide"><span><img src="img/ico/liberty.png">Liberty</span><span><img src="img/ico/progress.png">Progress</span></div>
+    </div>
+  </div>
+  <blockquote>Freedom breathes through art.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>An idealist and visionary, you believe deeply in the boundless power of art to reveal the hidden truths of reality. To you, science, art, literature, and music are pathways to explore the vast world beyond what our senses can grasp. Art, in your eyes, is a universal language that transcends barriers, guiding society toward enlightenment and liberation from the chains of tradition and restraint. You dream of a society continually transformed and uplifted by its engagement with art and expression, always marching toward a brighter, more enlightened future. Those who cling to the past seem to you like moths circling a dying flame, unaware of the dawn just beyond.</p></div>
+  <div class="folio">8 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_lyrie.png" alt=""><span>Lyrie</span><i>The Visionary Patron</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>Born into a distinguished family, you are a respected politician and powerful cultural figure, holding sway over the artistic scene and redefining the cultural landscape of a new Ankist. You are the visionary founder and patron of Freedomism, a groundbreaking art movement devoted to free expression, provocation, and the rejection of traditional norms. Freedomism’s provocative style has sparked both admiration and disdain—unpopular with traditionalists and the Cult but fervently championed by progressive Ankistan nobles. At the heart of the movement stands Tanais, a controversial yet brilliant artist whose works lay bare the raw reality of societal injustices, often casting a critical lens on abuses of power against the vulnerable.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>As an idealist with a keen understanding of politics and a trendsetter, Queen Serena saw you as an influencer of minds, and thought she could use the power of your art to bolster her rule. This position grants you the political influence needed to turn your artistic vision into reality, aligning the kingdom’s future with your ideals of liberty and progress.</p></div></div>
+  <div class="folio">9 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page" id="syd">
+  <div class="hero">
+    <img class="por" src="img/por_syd.jpg" alt="Syd">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_syd.png" alt="">
+      <h2><span>Syd</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Feral</div>
+      <div class="ide"><span><img src="img/ico/force.png">Force</span><span><img src="img/ico/liberty.png">Liberty</span></div>
+    </div>
+  </div>
+  <blockquote>Power resides in the will to take it.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>Distrustful and fiercely independent, you see the world as a battleground where power is the only true currency. While others deem your methods dishonorable, you know that true power requires stepping into the shadows where others fear to tread. Laws, to you, are merely tools the powerful use to feign morality and control the weak.</p><p>Unapologetic in your pursuit of strength, you command the loyalty of those who resent the nobility yet aspire to rise within its ranks. To them, you are not just a leader but a living example of how to claim what others dare not seize. Survival and power demand ruthless cunning—and you are more than willing to embrace it. You thrive in the shadows, maintaining ties with questionable dealings and seeing opportunity where others see danger.</p></div>
+  <div class="folio">10 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_syd.png" alt=""><span>Syd</span><i>The Feral</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>Once a low-key noble, you used to make small profits through the trade of the infamous Ash Bread, a mysterious compound that allows the eater to see glimpses of impending future violence. But your ambition drove you to carve out a greater place in the world. You spent your entire fortune to host a lavish feast for the region’s largest producers and dealers. Under the veil of opulence, you poisoned your guests to death, seizing control of the ash bread trade in an infamous event known as the “Brothers’ Banquet.” Stricken by fear of retaliation, you nearly became addicted to the bread, but had to quit as its effects fueled your paranoia.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>Too dangerous to be excluded from the Council, Queen Serena knew she had to bring you into the fold. In you, Serena sees a councilor unafraid to wield power decisively, no matter the cost.</p></div></div>
+  <div class="folio">11 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page" id="xanthe">
+  <div class="hero">
+    <img class="por" src="img/por_xanthe.jpg" alt="Xanthe">
+    <div class="who">
+      
+      <img class="crest" src="img/crest_xanthe.png" alt="">
+      <h2><span>Xanthe</span><span class="dots">Name deines Hauses</span></h2><div class="ti">The Crimson Shield</div>
+      <div class="ide"><span><img src="img/ico/order.png">Order</span><span><img src="img/ico/force.png">Force</span></div>
+    </div>
+  </div>
+  <blockquote>Strength is the most reliable weapon.</blockquote>
+  <div class="lab">Wer du bist</div>
+  <div class="txt" lang="en"><p>Strong, courageous, and fiercely loyal, you have been hailed as one of the bravest soldiers in the kingdom. As a newly elevated noble of Enkhali descent, you are twice an outsider among the elite of Ankist. Blunt and straightforward, you hold a firm belief in the power of force—rooted in the Askadar, the military discipline all Enkhali are trained in from childhood. To you, leadership and decisive rulings create true order—and true order brings true strength. Never one to back down from confrontation, you welcome every chance to test your valor in combat, for force is often the final and most honest arbiter of truth. A challenge of strength, after all, is far more straightforward than the duplicitous games of politics. But in both, no price is too high for victory.</p></div>
+  <div class="folio">12 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+<section class="page">
+  <div class="run"><img src="img/crest_xanthe.png" alt=""><span>Xanthe</span><i>The Crimson Shield</i></div>
+  <div class="lab">Woher du kommst</div>
+  <div class="txt" lang="en"><p>While most Enkhali retreated to their mountain strongholds, your ancestors chose to remain in Ankist, serving as Royal Guards to the crown. This decision forged a lifelong bond. You became the closest friend of the young Serena, and when an assassin attempted to take her life, it was your quick action that saved her. Upon ascending the throne, Serena honored this friendship by elevating you to nobility, a privilege never before seen by an enkhali in Ankist. However, this unexpected rise has earned you the suspicion and resentment of those you now govern, leaving you in a constant battle to prove your right to rule. As a fierce enkhali warrior, your iconic red iron armor is the thing you cherish most, since all those who abandon the war attire also forfeit the prestigious rank of warrior and bring dishonor to their name.</p></div>
+  <div class="queen"><div class="lab">Du und die Königin</div><div class="txt" lang="en"><p>Serena holds you in deep affection, seeing you as the older sister she never had. Now, as she battles in Konfurtah, Serena counts on your unwavering friendship to protect her reign in her absence, trusting you to safeguard her throne and the stability of the kingdom.</p></div></div>
+  <div class="folio">13 · © Horrible Games SRL · inoffizielle Abschrift</div>
+</section>
+
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>

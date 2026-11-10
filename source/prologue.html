@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>War in Konfurtah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 100mm 178mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Alegreya Sans", sans-serif; }
+.page { width: 100mm; height: 178mm; padding: 10mm 8.5mm 11mm; position: relative; overflow: hidden; break-after: page; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 35%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page:last-child { break-after: auto; }
+.page::before { content: ""; position: absolute; inset: 3.5mm; border: 0.6pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+.folio { position: absolute; bottom: 5.2mm; left: 0; right: 0; text-align: center; font-family: Cinzel, serif; font-size: 6.5pt; letter-spacing: .06em; color: var(--muted); }
+header { text-align: center; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .28em; font-size: 7.6pt; color: var(--gold); font-weight: 700; margin-top: 1mm; }
+h1 { font-family: Cinzel, serif; font-size: 21pt; line-height: 1.04; margin: 2.2mm 0 1.2mm; font-weight: 900; color: var(--red); }
+.tag { font-family: Alegreya, serif; font-style: italic; font-size: 10.5pt; color: var(--muted); }
+.orn { display: flex; align-items: center; justify-content: center; gap: 2mm; margin: 3mm auto 3.4mm; width: 42mm; }
+.orn span { flex: 1; height: .6pt; background: var(--goldl); }
+.orn i { width: 1.5mm; height: 1.5mm; background: var(--goldl); transform: rotate(45deg); }
+.lead { font-size: 9.4pt; line-height: 1.34; color: var(--muted); background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-left: 1.2mm solid var(--red); border-radius: 2mm; padding: 2mm 2.6mm; margin-bottom: 3.6mm; }
+blockquote { margin: 0 0 4.4mm; padding: 0 1mm; text-align: center;
+  font-family: Alegreya, serif; font-style: italic; font-size: 12pt; line-height: 1.25; color: var(--red); }
+.txt { font-family: Alegreya, serif; font-size: 11.6pt; line-height: 1.42; hyphens: auto; }
+.txt p { margin: 0 0 2.6mm; }
+.txt b { font-weight: 700; color: var(--red); }
+.cap::first-letter { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 27pt; float: left; line-height: .86; margin: 1mm 1.6mm 0 0; }
+.run { display: flex; align-items: center; gap: 2mm; padding-bottom: 1.6mm; margin-bottom: 3.4mm; border-bottom: .6pt solid var(--line); }
+.run span { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 10pt; letter-spacing: .04em; }
+.run i { font-family: Alegreya, serif; color: var(--muted); font-size: 9pt; margin-left: auto; }
+.end { margin-top: auto; text-align: center; }
+.end .orn { margin: 0 auto 2mm; }
+.end p { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 9.6pt; margin: 0; }
+</style></head>
+<body>
+
+<section class="page">
+  <header>
+    <div class="eyebrow">THE QUEEN'S DILEMMA</div>
+    <h1>War in Konfurtah</h1>
+    <div class="tag">Der Prolog, aus dem Regelheft</div>
+    <div class="orn"><span></span><i></i><span></span></div>
+  </header>
+  <blockquote>Needs no water, he who quenches his thirst on blood.</blockquote>
+  <div class="txt">
+    <p class="cap">After only a year of Queen Serena’s reign, ominous news arrives from the South. The once-divided southern continent of Konfurtah is now uniting under a single banner, forming the new and fearsome <b>Kingdom of the Undying Scorpion</b>—a force that threatens the stability of the entire realm.</p>
+  </div>
+  <div class="folio">1 · Regelheft v15, S. 13 · © Horrible Games SRL · inoffiziell</div>
+</section>
+
+<section class="page">
+  <div class="run"><span>War in Konfurtah</span><i>Widram</i></div>
+  <div class="txt">
+    <p>Once a fragmented and mostly infertile area composed of thousands of nomadic desert tribes, the kingdom has recently united under the will of their commander, a mysterious figure named <b>Widram</b>. Widram is an alchemist, a master of propaganda, a charismatic and fearsome leader who has proclaimed himself Ommad II, boasting a lineage that traces back to Ommad I, the legendary first King of Ankist. By doing so, he now claims rights over Ankist itself. Widram is reviving national pride in the Konfurtahn people, asserting that their ancient Sun Empire was the true cradle of Ankistan civilization and that we have merely taken from them a power that was rightfully theirs. Political savvy and charisma are not Widram’s only strengths. His most devoted followers—and his more frightened enemies—claim that his thirst for Ankistan blood is not just a figure of speech, and that Widram keeps himself eternally young and powerful by <b>drinking the blood of his enemies</b>. Whether this is true or merely propaganda designed to scare his enemies is unclear.</p>
+  </div>
+  <div class="folio">2 · Regelheft v15, S. 13 · © Horrible Games SRL · inoffiziell</div>
+</section>
+
+<section class="page">
+  <div class="run"><span>War in Konfurtah</span><i>The year 439</i></div>
+  <div class="txt">
+    <p>With Widram’s clever leadership and booming popular support from the faithful masses, the Scorpion consolidated the desert tribes and the various oases around the City of Tents, up to the Nebula Mountains, forming a huge army. For Queen Serena, this new rival is an <b>unacceptable menace</b>. She summoned the entire Council and all the high-ranking generals to the war room, where she planned a military expedition against this uncanny Kingdom of the Undying Scorpion. <b>She left for the front with the troops at the start of the year 439</b>, leaving the Councilors in charge of ruling in her place.</p>
+  </div>
+  <div class="folio">3 · Regelheft v15, S. 13 · © Horrible Games SRL · inoffiziell</div>
+</section>
+
+<section class="page">
+  <div class="run"><span>War in Konfurtah</span><i>The year 440</i></div>
+  <div class="txt">
+    <p>But after one year, in the year 440, our glorious war to defeat the first great menace for Queen Serena isn’t working out as expected—our first steps in the scorching sands have almost been washed away by winds reeking of death. Widram is an acute tactician, and his son Meto commands a well-organized army and has mastered the ways of the land. Every day we lose good Ankistan soldiers, butchered or mutilated by a determined enemy. The very land itself is a formidable foe. The white sands have become synonymous with death: we find <b>corpses desiccated</b> by the dire lack of water and thoroughly defleshed by powerful sandstorms. Widram himself is hard to find; he is said to rule from <b>Nidar Ilak</b>, an impenetrable bastion deep in the desert that surrounds the City of Tents, the kingdom’s capital. The fortress stands in the middle of the scorching desert, miles away from the nearest oasis. As the legends say, Widram does not need any water to stay alive, only the blood of his enemies—the blood of our brothers and sisters.</p>
+  </div>
+  <div class="folio">4 · Regelheft v15, S. 13 · © Horrible Games SRL · inoffiziell</div>
+</section>
+
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>

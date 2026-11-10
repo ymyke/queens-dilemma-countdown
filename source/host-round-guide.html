@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Spielleiter – ein Dilemma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 210mm 297mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --aye: #1f4f8a; --nay: #a3271f; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; color: var(--ink); font-family: "Alegreya Sans", sans-serif; font-size: 9pt; line-height: 1.25; background: var(--paper); }
+.page { width: 210mm; height: 297mm; padding: 10mm 11mm 9mm; position: relative; overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 30%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page::before { content: ""; position: absolute; inset: 5mm; border: .7pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+header { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: .9pt solid var(--goldl); padding-bottom: 1.8mm; margin-bottom: 2.4mm; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .26em; font-size: 7.4pt; color: var(--gold); font-weight: 700; }
+h1 { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 19pt; margin: .6mm 0 0; line-height: 1; }
+.tag { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 9.4pt; text-align: right; line-height: 1.25; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 5.5mm; flex: 1; }
+.col { display: flex; flex-direction: column; }
+h2 { display: flex; align-items: center; gap: 1.6mm; font-family: Cinzel, serif; font-size: 10pt; color: var(--red); margin: 0 0 1mm; letter-spacing: .02em; }
+h2 i { font-style: normal; width: 5mm; height: 5mm; border-radius: 50%; background: var(--red); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 7.6pt; flex: none; }
+h2 small { font-family: Alegreya, serif; font-style: italic; font-weight: 400; color: var(--muted); font-size: 8.4pt; letter-spacing: 0; margin-left: auto; }
+h3 { font-family: Cinzel, serif; font-size: 8.4pt; color: var(--gold); margin: 1.4mm 0 .6mm; letter-spacing: .04em; }
+section { margin-bottom: 2.2mm; }
+ul, ol { margin: 0; padding-left: 4mm; } li { margin: 0 0 .6mm; }
+ul.sub { margin: .4mm 0 .2mm; padding-left: 3.6mm; } ul.sub li { margin: 0 0 .3mm; list-style: "– "; }
+ol.num { margin: .4mm 0 .2mm; padding-left: 4.4mm; } ol.num li { margin: 0 0 .3mm; }
+ol.abc { list-style: none; padding-left: 0; counter-reset: s; }
+ol.abc > li { counter-increment: s; display: grid; grid-template-columns: 4mm 1fr; }
+ol.abc > li::before { content: counter(s, lower-alpha) "."; font-family: Cinzel, serif; font-weight: 700; color: var(--red); }
+p { margin: 0 0 .9mm; }
+.t { font-weight: 800; color: var(--red); }
+.aye { color: var(--aye); font-weight: 800; } .nay { color: var(--nay); font-weight: 800; }
+.dim { color: var(--muted); }
+.box { background: rgba(255,255,255,.5); border: .6pt solid var(--line); border-radius: 2mm; padding: 1.4mm 2.4mm; }
+.warn { border-left: 1.2mm solid var(--red); background: rgba(255,255,255,.55); border-radius: 0 2mm 2mm 0; padding: 1.4mm 2.4mm; }
+.key { background: var(--red); color: #fbf3e2; border-radius: 2mm; padding: 1.5mm 2.6mm; }
+.key b { color: #f6d98f; }
+.bottom { display: grid; grid-template-columns: 1.55fr 1fr; gap: 5.5mm; margin-top: 1mm; }
+h2.plain { margin-bottom: .6mm; }
+table { width: 100%; border-collapse: collapse; font-size: 8.4pt; line-height: 1.18; }
+td { padding: .7mm 1mm; vertical-align: top; border-bottom: .5pt dotted var(--line); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 800; color: var(--red); white-space: nowrap; width: 10mm; font-size: 8.4pt; }
+code { font-family: "Alegreya Sans", sans-serif; font-weight: 800; color: var(--ink); }
+.foot { margin-top: auto; font-size: 7.6pt; color: var(--muted); font-style: italic; border-top: .6pt solid var(--line); padding-top: 1.2mm; }
+.credit { position: absolute; bottom: 6.1mm; left: 0; right: 0; text-align: center; font-size: 6.3pt; color: var(--muted); }
+</style></head>
+<body>
+<section class="page">
+  <header>
+    <div>
+      <div class="eyebrow">THE QUEEN'S DILEMMA · FÜR DEN SPIELLEITER</div>
+      <h1>Ein Dilemma, Schritt für Schritt</h1>
+    </div>
+    <div class="tag">Seitenzahlen: Regelheft v15<br>Abstimmen im Detail: Spielerblatt<br>«Die Abstimmung»</div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><i>1</i>Read the Dilemma <small>S. 22–23</small></h2>
+        <ul>
+          <li>Die <span class="t">unterste</span> Karte des Dilemma deck ziehen und nur die Vorderseite zeigen. Ist das Deck leer, hilft das Troubleshooting Tool (S. 49), ausser alle 7 Ending sticker kleben schon (siehe 5).</li>
+          <li>Vorlesen und die hervorgehobenen <b>Keywords</b> deutlich ansagen. Dann die möglichen Folgen ansagen: welche Ideologien sich bewegen und ob Legacy-Folgen kommen (+, −, ?). Der Text kann weitere andeuten.</li>
+          <li><b>Outcome markers</b> aufs Ideology board legen: <span class="aye">blau</span> für Aye, <span class="nay">rot</span> für Nay, je neben die betroffene Ideologie. Legacy-Folgen bekommen ebenfalls einen Marker in ihrer Farbe, auf das Feld +, − oder ?.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><i>2</i>Voting Phase <small>S. 23–26</small></h2>
+        <ul>
+          <li>Vorher die aktiven <b>Chronicle</b> und Event cards anschauen. Ein farbiger Balken «Voting Phase» auf der Karte gilt die ganze Abstimmung lang. Balkenfarbe der Chronicle cards: hellblau = Setup, gelb = während des Spiels, dunkelblau = erst am Spielende (S. 44). Chronicle cards und Skills gehen dem Regelheft vor.</li>
+          <li>Der <b>Leader</b> beginnt, dann geht es im Uhrzeigersinn. Die Abstimmung endet nach dem Zug des Spielers <span class="t">rechts vom aktuellen Leader</span>. Wer gepasst hat, wird übersprungen: Ist der Leader wieder dran, ist Schluss.</li>
+          <li><b>Vote:</b> Mindestens 1 Power auf die <span class="aye">blaue</span> oder <span class="nay">rote</span> Seite des eigenen Voting tile legen. Später <b>Raise</b> oder <b>Stay</b>. Wer gevotet hat, wechselt die Seite nicht mehr und kann nicht mehr passen.</li>
+          <li><b>Pass:</b> Voting tile umdrehen. Wer passt, ist für diese Abstimmung draussen und wählt genau 1 Pass Action und darf dazu 1 Pass Bonus ausführen, falls freigeschaltet.
+            <ul class="sub">
+              <li>Gather Power: Heraldry token auf Aontas.</li>
+              <li>Become Moderator: Moderator token aufs eigene Tile. Danach ist es für diese Abstimmung vergeben.</li>
+              <li>Aktion einer Karte oder eines Skills: Bei Karten Heraldry token in den Slot neben der Karte am rechten Rand der Map, sofort ausführen. Gesperrt bei belegtem Slot, ohne freies Pass Action space (ausser die Karte hat gar keine), bei unbezahlbaren Kosten oder wenn die Karte es einschränkt.</li>
+            </ul></li>
+          <li>Wer am Ende seines Zugs <span class="t">allein</span> am meisten Power auf dem Tile hat, nimmt sofort den Leader token.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><i>3</i>Vote Resolution <small>S. 27–28</small></h2>
+        <p class="warn"><b>Power noch auf den Tiles lassen</b> und erst zählen. Laut ansagen, wer auf der Siegerseite gevotet hat, denn nach dem Aufräumen sieht man es nicht mehr.</p>
+        <ul>
+          <li>Power auf <span class="aye">Aye</span> und auf <span class="nay">Nay</span> zusammenzählen. Mehr gewinnt.</li>
+          <li>Gleichstand: Der <b>Moderator</b> entscheidet.</li>
+          <li>Alle haben gepasst: Der Moderator entscheidet, nimmt den Leader token und gilt als Winner.</li>
+          <li>Leader auf der Verliererseite: Der Token geht an den Gewinner mit der meisten Power, bei Gleichstand bestimmt der Moderator.</li>
+        </ul>
+        <h3>Aufräumen, in dieser Reihenfolge</h3>
+        <ol class="abc">
+          <li><span><b>Power Distribution:</b> Den Topf auf Aontas gleichmässig an alle mit Gather Power verteilen. Der Rest bleibt liegen, die Heraldry tokens gehen zurück.</span></li>
+          <li><span><b>Moderator token</b> vom Tile nehmen und gut sichtbar vor den Moderator legen. Become Moderator ist wieder frei.</span></li>
+          <li><span><b>Special Actions:</b> Heraldry tokens aus den Slots auf das <span class="t">höchste freie</span> Pass Action space derselben Karte setzen. Sind alle Felder belegt, ist die Aktion für den Rest des Spiels weg. Bei ∞ stapeln. Karte ohne Felder: Token zurücknehmen. Event cards: wie auf der Karte.</span></li>
+          <li><span><b>Power Cleanup:</b> Die Verlierer nehmen ihre Power zurück in die Treasury. Die Gewinner legen ihre Power in den Topf auf Aontas.</span></li>
+        </ol>
+      </section>
+    
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><i>4</i>Dilemma Resolution <small>S. 29–31</small></h2>
+        <ol class="abc">
+          <li><span><b>Umdrehen:</b> Gewinnt <span class="aye">Aye</span>, die Karte seitlich umdrehen wie eine Buchseite. Gewinnt <span class="nay">Nay</span>, sie nach oben umklappen. Den Ausgang der Siegerseite vorlesen.</span></li>
+          <li><span><b>Keyword effects</b> einzeln abarbeiten, von links nach rechts, dann von oben nach unten. <b>Players</b> trifft alle, auch wer gepasst hat. <b>Winners</b> trifft alle, die auf der Siegerseite gevotet haben (haben alle gepasst: den Moderator). <b>Leader</b> und <b>Moderator</b> treffen, wer den Token hat. Figuren-, Regions- und andere Keywords treffen, wer sie im Diary hat. Ohne Keyword trifft es, wer die Aktion macht. Die Codes erklärt das Regelheft (S. 41–47). Leicht vergessen: Leeres Fristfeld einer Agenda card bekommt die Spielnummer + 3. Eine neue Chronicle card kommt sofort ins Chronicle deck und wirkt erst später. Trifft ein Code mehrere, gibt es aber nur eine Karte: am Tisch entscheiden.</span></li>
+          <li><span><b>Ideology board:</b> Die Schieber um die angegebene Zahl verschieben. Am Ende der Leiste verfällt der Rest. Für <span class="t">jede Ideologie im Ausgang der Siegerseite</span> 1 Hegemony token neben ihr Symbol legen, auch wenn sich der Schieber nicht bewegt hat.</span></li>
+        </ol>
+        <p class="key" style="margin:1mm 0 1.2mm"><b>Umschläge und Mystery boxes nie vergessen.</b> Sonst bleibt die Kampagne stecken. Steckt sie trotzdem fest: Troubleshooting Tool (S. 49).</p>
+        <ol class="abc" style="counter-reset: s 3">
+          <li><span><b>Umschlag:</b> Zeigt der Ausgang ✉ mit 2 Ziffern, diesen Umschlag aus dem Legacy tray öffnen.
+            <ol class="num">
+              <li>Story card: Bild zeigen, Titel lesen, umdrehen und vorlesen.</li>
+              <li>Ihre Effekte anwenden.</li>
+              <li>Den leeren Umschlag zurück in den Legacy tray legen.</li>
+              <li>Die Story card auf den Platz mit ihrem Symbol am oberen Rand der Map legen, oben auf frühere. Klebt dort ein Ending sticker: in den Save tray.</li>
+              <li>Die Dilemma cards aus dem Umschlag ins Deck mischen.</li>
+            </ol></span></li>
+          <li><span><b>Mystery box:</b> Zeigt der Ausgang M mit 2 Ziffern, diese Mystery box aus der Spielschachtel holen. Den <span class="t">WARNING!</span>-Kasten oben in ihrem Regelblatt sofort lesen und befolgen. Alle Dilemma cards daraus sofort ins Deck aufnehmen.</span></li>
+          <li><span><b>Neue Runde vorbereiten:</b> Die Karte halb unter den untersten freien Platz des <b>Round Counter</b> am linken Rand der Map schieben (Plätze 1 bis 9 von unten nach oben). Die Rückseite liegt oben, damit der Ausgang sichtbar bleibt. Alle Outcome markers zurück in den Vorrat.</span></li>
+        </ol>
+      </section>
+
+      <section>
+        <h2><i>5</i>Ende des Spiels? <small>S. 32</small></h2>
+        <ul>
+          <li>Eine Karte mit <span class="t">Sanduhr</span> auf der Rückseite liegt auf einem der Plätze 7 bis 9 des Round Counter.</li>
+          <li>Oder die <span class="t">9. Karte</span> liegt auf dem letzten Platz.</li>
+          <li class="dim">Spät in der Kampagne: Alle 7 Ending sticker kleben und das Deck ist leer. Danach folgt nur noch das Grand Finale (S. 39).</li>
+        </ul>
+        <p class="warn" style="margin-top:1mm"><b>Ja:</b> weiter mit End of the Game (S. 33). Umschläge und Mystery boxes dieser Karte gehören noch dazu. <b>Nein:</b> nächstes Dilemma, zurück zu 1.</p>
+      </section>
+<div class="box" style="margin-top:auto">
+      <b class="t">Bezahlen (S. 40)</b>
+      <ul style="margin-top:.4mm">
+        <li>Muss jemand zahlen und kann oder will nicht: <b>+1 Infamy</b> pro fehlende Ressource.</li>
+        <li>Freiwillige Aktionen (Pass Actions und Bonuses, Agendas, Investments, manche Skills) darf nur ausführen, wer zahlen kann.</li>
+        <li>Beim Bezahlen ersetzen <b>2 Gold</b> jederzeit 1 andere Ressource.</li>
+        <li>Verlorene Power kommt in den Topf auf Aontas, gewonnene aus dem allgemeinen Vorrat.</li>
+        
+      </ul>
+    </div>
+    
+
+  
+    </div>
+  </div>
+
+<div class="credit">Inoffizielles Fan-Hilfsblatt, vom Verlag nicht geprüft. Basis: Regelheft v15. The Queen's Dilemma © Horrible Games SRL.</div>
+</section>
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  document.querySelectorAll('.col').forEach((c, i) => { if (c.scrollHeight > c.clientHeight + 1) o.push('col' + (i+1) + ':' + (c.scrollHeight - c.clientHeight)); });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>

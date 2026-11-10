@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Willkommen im Rat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 100mm 178mm; margin: 0; }
+:root {
+  --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c;
+  --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --aye: #1f4f8a; --nay: #a3271f; --line: #cdb88c;
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Alegreya Sans", "DejaVu Sans", sans-serif; font-size: 10.6pt; line-height: 1.36; }
+.page { width: 100mm; height: 178mm; padding: 9mm 8mm 8.6mm; position: relative; overflow: hidden; break-after: page; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 35%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page:last-child { break-after: auto; }
+.page::before { content: ""; position: absolute; inset: 3.5mm; border: 0.6pt solid var(--line); pointer-events: none; }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+.folio { position: absolute; bottom: 5.2mm; left: 0; right: 0; text-align: center; font-family: Cinzel, serif; font-size: 6.5pt; letter-spacing: .18em; color: var(--muted); }
+h1, h2, h3, h4 { font-family: Cinzel, serif; margin: 0; }
+h2 { font-size: 14.5pt; color: var(--red); letter-spacing: .03em; line-height: 1.12; font-weight: 700; }
+h2 + .sub { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 10.5pt; margin: 1mm 0 3.4mm; line-height: 1.25; }
+h3 { font-size: 9.2pt; letter-spacing: .07em; color: var(--ink); margin: 3.2mm 0 1.2mm; font-weight: 700; }
+p { margin: 0 0 2.2mm; }
+b { font-weight: 700; }
+.t { font-weight: 800; color: var(--red); }
+.aye { color: var(--aye); font-weight: 800; } .nay { color: var(--nay); font-weight: 800; }
+ul, ol { margin: 0 0 2.2mm; padding-left: 4.6mm; } li { margin: 0 0 1.2mm; }
+.box { background: rgba(255,255,255,.5); border: 0.6pt solid var(--line); border-radius: 2mm; padding: 2.6mm 3mm; margin: 0 0 2.6mm; }
+.box p:last-child, .box ul:last-child { margin-bottom: 0; }
+.key { background: var(--red); color: #fbf3e2; border-radius: 2mm; padding: 3mm 3.4mm; margin: 2mm 0 2.6mm; }
+.key b { color: #fff; }
+.key .big { font-family: Cinzel, serif; font-size: 10.2pt; font-weight: 700; display: block; margin-bottom: 1.2mm; color: #f6d98f; line-height: 1.2; }
+.small { font-size: 9.8pt; line-height: 1.33; }
+.muted { color: var(--muted); }
+.ico { width: 1.1em; height: 1.1em; vertical-align: -0.2em; }
+img { display: block; max-width: 100%; }
+.push { margin-top: auto; }
+
+/* cover */
+.cover { text-align: center; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .28em; font-size: 8pt; color: var(--gold); margin-top: 4mm; font-weight: 700; }
+.cover h1 { font-size: 24pt; line-height: 1.04; margin: 2.6mm 0 1.6mm; font-weight: 900; color: var(--red); }
+.tag { font-family: Alegreya, serif; font-style: italic; font-size: 11.5pt; color: var(--muted); }
+.crest { width: 19mm; height: 19mm; margin: 5mm auto 4mm; }
+.lead { font-family: Alegreya, serif; font-size: 11pt; line-height: 1.42; text-align: left; }
+.lead::first-letter { font-family: Cinzel, serif; font-size: 27pt; float: left; line-height: .9; margin: 1mm 1.4mm 0 0; color: var(--red); font-weight: 900; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm; margin: 2mm 0 5mm; text-align: center; }
+.facts > div { border-top: 0.9pt solid var(--goldl); border-bottom: 0.9pt solid var(--goldl); padding: 2mm .5mm; }
+.facts .v { font-family: Cinzel, serif; font-weight: 900; font-size: 15pt; color: var(--red); line-height: 1.1; }
+.facts .l { font-size: 9pt; color: var(--muted); line-height: 1.2; margin-top: .6mm; }
+.quote { font-family: Alegreya, serif; font-size: 13.5pt; line-height: 1.3; text-align: center; color: var(--ink); margin: 2mm 1mm 4mm; }
+.quote b { color: var(--red); }
+.toc { font-size: 9.6pt; line-height: 1.75; color: var(--muted); text-align: center; }
+.toc span { color: var(--goldl); padding: 0 .8mm; }
+.toc a { color: var(--red); text-decoration: none; border-bottom: .5pt dotted var(--red); }
+
+/* points */
+.pts { display: grid; grid-template-columns: 9mm 1fr; gap: 1.6mm 2.6mm; align-items: start; margin: 1mm 0 2mm; }
+.pts .ico { width: 9mm; height: 9mm; }
+.pts .n { font-family: Cinzel, serif; font-weight: 700; font-size: 9.6pt; }
+.pts .d { font-size: 10pt; line-height: 1.3; margin-bottom: 1.4mm; }
+
+/* loop */
+.step { display: grid; grid-template-columns: 7mm 1fr; gap: 2.4mm; margin-bottom: 1.5mm; }
+.num { width: 7mm; height: 7mm; border-radius: 50%; background: var(--gold); color: #fff; font-family: Cinzel, serif; font-weight: 700; font-size: 9pt; display: flex; align-items: center; justify-content: center; margin-top: .3mm; }
+.step h4 { font-size: 9.2pt; margin: .6mm 0 .8mm; letter-spacing: .04em; }
+.step p { margin: 0; }
+.rlabel { font-family: Cinzel, serif; font-size: 8.5pt; letter-spacing: .1em; color: var(--gold); font-weight: 700; margin: 0 0 2mm; }
+.rounds { border-left: 0.9pt dashed var(--goldl); margin-left: 3.4mm; padding-left: 5mm; }
+.rounds .num { background: var(--red); width: 6mm; height: 6mm; font-size: 8pt; }
+.rounds .step { grid-template-columns: 6mm 1fr; }
+.again { font-family: Cinzel, serif; font-size: 8.5pt; color: var(--red); font-weight: 700; letter-spacing: .06em; margin: 0 0 1mm; }
+
+/* example dilemma */
+.dcard { border-radius: 2.4mm; overflow: hidden; border: 0.8pt solid #7c6644; background: #fffaf0; box-shadow: 0 1mm 2.5mm rgba(60,40,10,.25); margin: 1mm 0 3mm; }
+.dcard .hd { background: #3a2d22; color: #f6e7c4; font-family: Cinzel, serif; font-size: 8pt; letter-spacing: .14em; padding: 1.6mm 3mm; display: flex; justify-content: space-between; }
+.dcard .tx { font-family: Alegreya, serif; font-size: 10.6pt; line-height: 1.38; padding: 2.6mm 3mm 2mm; }
+.dcard .tx .kw { background: #f3dba3; padding: 0 .8mm; border-radius: .6mm; font-weight: 700; }
+.dcard .opts { display: grid; grid-template-columns: 1fr 1fr; }
+.dcard .opts div { padding: 2mm 3mm; font-size: 9.6pt; line-height: 1.3; color: #fff; }
+.dcard .opts .a { background: var(--aye); } .dcard .opts .n { background: var(--nay); }
+.dcard .opts b { font-family: Cinzel, serif; display: block; font-size: 9pt; letter-spacing: .1em; }
+
+/* voting */
+.cost { display: grid; grid-template-columns: 1fr; gap: 1.4mm; margin-top: 1mm; }
+.cost div { background: rgba(255,255,255,.13); border-radius: 1.4mm; padding: 1.6mm 2.4mm; font-size: 10pt; line-height: 1.3; }
+.cost b { font-family: Cinzel, serif; font-size: 9.4pt; color: #f6d98f; margin-right: 1mm; }
+
+/* ideology */
+.emblems { display: grid; grid-template-columns: 1fr; gap: 1.4mm; margin: 0 auto 2.2mm; width: 42mm; }
+.emblems img { width: 100%; border-radius: 1.4mm; }
+.trackl { display: flex; justify-content: space-between; font-family: Cinzel, serif; font-size: 7.6pt; color: var(--muted); letter-spacing: .05em; font-weight: 700; }
+.track { display: grid; grid-template-columns: repeat(7, 1fr); gap: .8mm; margin: 1.2mm 0 1.6mm; }
+.track span { height: 5.5mm; border-radius: .7mm; background: #fffdf6; border: .5pt solid #c4ad7d; }
+.track span.s { background: #d6dbe1; border-color: #8f99a5; }
+.track span.on { background: var(--red); border-color: var(--red); }
+.track span.s.on { background: var(--red); border-color: #8f99a5; box-shadow: inset 0 0 0 1.1mm #d6dbe1; }
+
+/* glossary + checklist */
+dl.gl { margin: 0; font-size: 9.5pt; line-height: 1.26; }
+dl.gl dt { font-weight: 800; color: var(--red); margin-top: 1.1mm; }
+dl.gl dd { margin: 0; }
+.check { list-style: none; padding-left: 0; }
+.check li { position: relative; padding-left: 5.4mm; margin-bottom: 1.8mm; }
+.check li::before { content: ""; position: absolute; left: 0; top: .9mm; width: 3.2mm; height: 3.2mm; border: 1pt solid var(--red); border-radius: .7mm; }
+.sign { font-family: Alegreya, serif; font-style: italic; text-align: center; color: var(--muted); font-size: 10pt; }
+
+.folio { font-family: "Alegreya Sans", sans-serif !important; font-size: 8.5pt !important; letter-spacing: .05em !important; font-weight: 700; }
+a { color: var(--red); text-decoration: none; border-bottom: .5pt dotted var(--red); }
+.toc2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(6, auto); grid-auto-flow: column; gap: 1.2mm 3mm; margin-top: auto; font-size: 9.4pt; line-height: 1.2; }
+.toc2 a { display: flex; justify-content: space-between; gap: 1.5mm; border-bottom: .5pt dotted var(--line); color: var(--ink); padding: .9mm 0; }
+.toc2 a i { font-style: normal; font-weight: 800; color: var(--red); }
+dl.gl dt a.pg { font-style: normal; font-weight: 700; color: var(--muted); font-size: 8.4pt; margin-left: 1mm; }
+ol.qa li { margin-bottom: 2.6mm; font-size: 10.6pt; }
+ol.qa.small li { font-size: 9.9pt; }
+ol.qa a { white-space: nowrap; }
+
+.icard { display: grid; grid-template-columns: 35mm 1fr; gap: 3mm; align-items: center; margin: 0 0 3mm; }
+.icard .c { background: linear-gradient(#7a2a45,#5e1f35); border-radius: 2mm; padding: 2.4mm 2mm 3mm; position: relative; box-shadow: 0 .8mm 2mm rgba(60,20,30,.3); }
+.icard .num { position: absolute; top: -2.4mm; left: 50%; transform: translateX(-50%); width: 6mm; height: 6mm; margin: 0; background: #fff; color: #2b2118; border: .6pt solid #5e1f35; font-size: 9pt; }
+.icard .goals { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; margin-top: 3mm; }
+.icard .g { background: #fbf4e4; border: .8pt solid #c9a24a; border-radius: 1mm; text-align: center; padding: 1.4mm .6mm 1.2mm; }
+.icard .g .sym { font-family: Cinzel, serif; font-size: 6.4pt; font-weight: 700; line-height: 1.15; color: #6b4d12; min-height: 6mm; display: flex; align-items: center; justify-content: center; }
+.icard .g .sym.two { border-top: .5pt dashed #c9a24a; border-bottom: .5pt dashed #c9a24a; }
+.icard .g .b { font-weight: 800; color: #6b4d12; font-size: 8.4pt; margin-top: .8mm; }
+.icard .lab { font-size: 9.2pt; line-height: 1.3; }
+.icard .lab b { color: var(--red); }
+.board { background: #f7efdc; border: .6pt solid var(--line); border-radius: 1.6mm; padding: 2mm 2.2mm; margin: 0 0 2.6mm; }
+.brow { display: grid; grid-template-columns: 15mm 1fr 15mm; align-items: center; gap: 1.2mm; margin: 1mm 0; }
+.brow .n { font-family: Cinzel, serif; font-size: 6.4pt; font-weight: 700; color: var(--muted); line-height: 1.05; }
+.brow .n.r { text-align: right; }
+.brow .n i { display: block; font-style: normal; color: #b8912e; letter-spacing: .5mm; font-size: 7pt; min-height: 2.4mm; }
+.brow .tr { display: grid; grid-template-columns: repeat(7,1fr); gap: .6mm; }
+.brow .tr span { height: 4.4mm; border-radius: .6mm; background: #fffdf6; border: .5pt solid #c4ad7d; }
+.brow .tr span.s { background: #d6dbe1; border-color: #8f99a5; }
+.brow .tr span.on { background: var(--red); border-color: var(--red); box-shadow: inset 0 0 0 1mm #fffdf6; }
+.brow .tr span.s.on { box-shadow: inset 0 0 0 1mm #d6dbe1; }
+.brow.hl { background: rgba(184,145,46,.18); border-radius: 1mm; }
+
+img.sy { display: inline-block; width: 6.6mm; height: 6.6mm; vertical-align: middle; }
+img.syw { display: inline-block; width: 4.6mm; height: 4.6mm; vertical-align: -1.2mm; filter: invert(1); margin-right: .6mm; }
+img.syi { display: inline-block; width: 3.6mm; height: 3.6mm; vertical-align: -.8mm; }
+img.syb { display: inline-block; width: 3.4mm; height: 3.4mm; vertical-align: -.9mm; margin-right: .4mm; }
+.ladder { margin: 1.2mm 0 2.6mm; }
+.ladder .rg { display: grid; grid-template-columns: 1fr auto; column-gap: 2mm; align-items: baseline; background: rgba(255,255,255,.55); border: .6pt solid var(--line); border-radius: 2mm; padding: 1.6mm 2.8mm 1.8mm; }
+.ladder .rn { font-family: Cinzel, serif; font-weight: 700; font-size: 9.8pt; color: var(--red); letter-spacing: .03em; }
+.ladder .rw { font-family: Alegreya, serif; font-style: italic; font-size: 9.6pt; color: var(--gold); text-align: right; }
+.ladder .rw.win { font-family: Cinzel, serif; font-style: normal; font-weight: 900; color: var(--red); font-size: 10pt; }
+.ladder .rd { grid-column: 1 / -1; font-size: 9.3pt; line-height: 1.28; color: var(--muted); margin-top: .4mm; }
+.ladder .rl { position: relative; height: 6.6mm; margin-left: 5mm; border-left: 1.4pt solid var(--goldl); }
+.ladder .rl span { position: absolute; left: 2.6mm; top: 50%; transform: translateY(-50%); font-family: Cinzel, serif; font-size: 8.2pt; font-weight: 700; color: var(--gold); letter-spacing: .05em; }
+.ladder .rl.dim { border-left-style: dashed; }
+.ladder .dim { opacity: .72; }
+.ladder .rg.dim { background: rgba(255,255,255,.3); border-style: dashed; }
+.credit { position: absolute; bottom: 9.5mm; left: 9mm; right: 9mm; text-align: center; font-family: "Alegreya Sans", sans-serif; font-size: 7pt; line-height: 1.3; color: var(--muted); }
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="crown" viewBox="0 0 24 24"><path fill="#b8912e" stroke="#6d531b" stroke-width=".8" d="M2.5 18.5 1.5 7.5l5.6 4.6L12 4l4.9 8.1 5.6-4.6-1 11z"/><rect x="2.5" y="19.2" width="19" height="2.6" rx=".6" fill="#b8912e" stroke="#6d531b" stroke-width=".8"/></symbol>
+  <symbol id="tower" viewBox="0 0 24 24"><path fill="#4e6a8a" stroke="#253547" stroke-width=".8" d="M5 3h3v2.5h2.4V3h3.2v2.5H16V3h3v5.5l-2 1.6V18l2 1.2V22H5v-2.8L7 18v-7.9L5 8.5z"/><rect x="10.6" y="13" width="2.8" height="4.2" rx="1.4" fill="#253547"/></symbol>
+  <symbol id="skull" viewBox="0 0 24 24"><path fill="#ece4d2" stroke="#3a2f26" stroke-width="1" d="M12 2.5c-5 0-8.5 3.4-8.5 8 0 2.8 1.3 4.6 3 5.6V20c0 .9.7 1.5 1.5 1.5h8c.8 0 1.5-.6 1.5-1.5v-3.9c1.7-1 3-2.8 3-5.6 0-4.6-3.5-8-8.5-8z"/><circle cx="8.6" cy="11.2" r="2.1" fill="#3a2f26"/><circle cx="15.4" cy="11.2" r="2.1" fill="#3a2f26"/><path d="M12 13.6l-1.3 2.4h2.6z" fill="#3a2f26"/><path d="M9.5 19v2.2M12 19v2.2M14.5 19v2.2" stroke="#3a2f26" stroke-width=".9"/></symbol>
+</svg>
+
+<!-- 1 · COVER -->
+<section class="page cover">
+  <div class="eyebrow">THE QUEEN'S DILEMMA</div>
+  <h1>Willkommen<br>im Rat</h1>
+  <svg class="crest" viewBox="0 0 24 24"><use href="#crown"/></svg>
+  <p class="lead">Königin Serena führt Krieg, fern im Süden in Konfurtah. Solange sie fort ist, regiert ihr Rat das Königreich Ankist, und dieser Rat sind wir: Häuser mit eigenen Überzeugungen, eigenen Provinzen und eigenen geheimen Zielen. Wir streiten, feilschen und stimmen ab. Und was wir beschliessen, bleibt für immer.</p>
+  <div class="quote" style="margin-top:5mm">Das Spiel ist <b>nicht kooperativ</b>. Was dem Reich nützt, kann dir schaden, und umgekehrt. Genau darin liegt das Dilemma.</div>
+  <div class="credit">Inoffizielle Fan-Hilfe, vom Verlag nicht geprüft. Basis: Regelheft v15. The Queen's Dilemma, Bilder und Symbole © Horrible Games SRL.</div>
+  <div class="folio">1</div>
+</section>
+
+<!-- 2 · AT A GLANCE -->
+<section class="page">
+  <h2>Auf einen Blick</h2>
+  <div class="sub">Eine Kampagne, die sich merkt, was wir tun</div>
+  <div class="ladder">
+    <div class="rg"><div class="rn">Kampagne</div><div class="rw win">1 Sieger</div><div class="rd">Punkte, Ressourcen und Provinzen bleiben bis zum Schluss.</div></div>
+    <div class="rl"><span>14–18 Spiele</span></div>
+    <div class="rg"><div class="rn">Spiel</div><div class="rw">niemand gewinnt</div><div class="rd">Jeder startet mit 7 Power und zieht eine neue Ideology card. Am Ende trägt jeder seine Punkte ins Diary ein.</div></div>
+    <div class="rl"><span>7–9 Dilemmas</span></div>
+    <div class="rg"><div class="rn">1 Dilemma = 1 Abstimmung</div><div class="rw">eine Seite gewinnt</div><div class="rd"><span class="aye">Aye</span> oder <span class="nay">Nay</span>. Wer danach Leader ist, trägt die Folgen.</div></div>
+    <div class="rl dim"><span>1 oder mehr Umläufe</span></div>
+    <div class="rg dim"><div class="rn">Umlauf · Zug</div><div class="rw">Details ab <a href="#abstimmung">Seite 10</a></div><div class="rd">Reihum entscheidet jeder: Vote, Raise, Stay oder Pass.</div></div>
+  </div>
+  <p class="small muted" style="margin-top:-.6mm">Leader token und Moderator token gibt es je einmal. Sie wechseln den Besitzer und bleiben von Spiel zu Spiel liegen.</p>
+  <div class="toc2">
+    <a href="#punkte">Worum du spielst<i>3</i></a><a href="#ideologien">Wohin das Reich kippt<i>4</i></a><a href="#idcard">Deine Ideology card<i>5</i></a><a href="#abend">Ein Spiel<i>7</i></a><a href="#dilemma">Ein Dilemma<i>9</i></a><a href="#abstimmung">Die Abstimmung<i>10</i></a><a href="#fuehrung">Wer führt, verlängert<i>11</i></a><a href="#feilschen">Feilschen<i>12</i></a><a href="#ressourcen">Ressourcen &amp; Provinzen<i>13</i></a><a href="#tipps">Drei Ratschläge<i>14</i></a><a href="#check">Kannst du es erklären?<i>15</i></a><a href="#woerterbuch">Wörterbuch<i>17</i></a>
+  </div>
+  <div class="folio">2</div>
+</section>
+
+<!-- 3 · POINTS -->
+<section class="page" id="punkte">
+  <h2>Worum du spielst</h2>
+  <div class="sub">Drei Leisten in deinem Diary</div>
+  <p>Jedes Haus hat ein <span class="t">Diary</span>, sein Tagebuch. Darin stehen deine Figur, ihre Geschichte und drei Leisten für Punkte:</p>
+  <div class="pts">
+    <svg class="ico"><use href="#crown"/></svg><div><div class="n">Hegemony</div><div class="d">Dein Ansehen bei Krone und Reich.</div></div>
+    <svg class="ico"><use href="#tower"/></svg><div><div class="n">Independence</div><div class="d">Deine eigene Macht, unabhängig von der Krone.</div></div>
+    <svg class="ico"><use href="#skull"/></svg><div><div class="n">Infamy</div><div class="d">Dein schlechter Ruf. Er sammelt sich über die ganze Kampagne. Ab 5 Infamy kostet er dich am Ende Punkte, und es wird stufenweise teurer.</div></div>
+  </div>
+  <div class="key"><span class="big">Der Clou</span>Niemand weiss vorher, ob Hegemony oder Independence mehr wert sein wird. Ist das Reich am Ende der Kampagne <b>stabil</b>, zählt <b>Hegemony</b> mehr. Ist es <b>zerrüttet</b>, zählt <b>Independence</b> mehr. Wie stabil es wird, bestimmen wir mit unseren Beschlüssen. Die Kampagne erzählt mehrere Handlungsstränge. Endet einer, kommt ein Sticker auf die Landkarte, und die Waagen darauf zeigen, wie gut das Ende für das Reich war. So sieht man den Stand laufend. Wie viel mehr dann zählt, verrät erst das Finale.</div>
+  <div class="folio">3</div>
+</section>
+
+<!-- 4 · IDEOLOGIES -->
+<section class="page" id="ideologien">
+  <h2>Wohin das Reich kippt</h2>
+  <div class="sub">Sechs Ideologien auf drei Achsen</div>
+  <div class="emblems"><img src="img/e1.jpg" alt="Tradition gegen Progress"><img src="img/e2.jpg" alt="Force gegen Diplomacy"><img src="img/e3.jpg" alt="Order gegen Liberty"></div>
+  <p>Auf dem <span class="t">Ideology board</span> liegt für jede Achse ein Schieber (<span class="t">Slider</span>). Jedes Spiel beginnt mit allen dreien in der Mitte. Gewinnt eine Seite eine Abstimmung, rücken die Schieber in Richtung ihrer Ideologien vor, so weit, wie die Rückseite der Karte angibt, höchstens bis zum Rand, und jede dieser Ideologien bekommt einen <span class="t">Hegemony token</span>. Die Tokens bleiben auf dem Board. Am Spielende bringen sie allen Punkte, deren Ideology card diese Ideologie nennt, egal wie sie abgestimmt haben.</p>
+  <div class="box small"><b>Gleicher Name, zwei Dinge:</b> Ein Hegemony token ist eine Marke auf dem Board und gehört niemandem. Am Spielende zählt er als 1 Hegemony-Punkt für jeden, dessen Karte die Ideologie nennt. Die Punkte trägst du in dein Diary ein.</div>
+  <div class="folio">4</div>
+</section>
+
+<!-- 5 · IDEOLOGY CARD -->
+<section class="page" id="idcard">
+  <h2>Deine Ideology card</h2>
+  <div class="sub">Dein geheimes Ziel für dieses eine Spiel</div>
+  <p>Zu Beginn jedes Spiels ziehst du eine Ideology card. Sie zeigt ein oder zwei Ziele. Am Spielende wird jedes Ziel für sich gewertet, und die Punkte zählen zusammen. Es gibt zwei Sorten:</p>
+  <div class="box small"><b>Favored</b> (ein Symbol): Diese Ideologie soll vorne liegen.<br>• Für jeden Hegemony token bei ihr: 1 Hegemony-Punkt.<br>• Liegt sie am Spielende vorne: dazu der Bonus auf der Karte.</div>
+  <div class="box small"><b>Balanced</b> (zwei Symbole einer Achse): Die Achse soll ausgeglichen bleiben.<br>• Für jeden Token der Seite mit weniger Tokens: 1 Hegemony-Punkt.<br>• Steht der Schieber am Spielende in der silbernen Zone: dazu der Bonus auf der Karte.</div>
+  <div class="box">
+    <div class="trackl"><span>Tradition</span><span>Progress</span></div>
+    <div class="track"><span></span><span></span><span class="s"></span><span class="s"></span><span class="s on"></span><span></span><span></span></div>
+    <p class="small muted">Die silberne Zone sind die Mitte und je ein Feld daneben. Vorne liegt eine Ideologie, sobald der Schieber auf ihrer Seite steht. Hier liegt also Progress vorne, und die Achse gilt zugleich als ausgeglichen. Genau in der Mitte liegt keine Seite vorne.</p>
+  </div>
+  <div class="folio">5</div>
+</section>
+
+<!-- 5b · IDEOLOGY EXAMPLE -->
+<section class="page" id="idbeispiel">
+  <h2>Ein Beispiel</h2>
+  <div class="sub">Lyries Karte am Spielende, nach dem Regelheft</div>
+  <div class="icard">
+    <div class="c"><div class="num">1</div>
+      <div class="goals">
+        <div class="g"><div class="sym"><img class="sy" src="img/ico/liberty.png" alt="liberty"></div><div class="b">+3 ♛</div></div>
+        <div class="g"><div class="sym"><img class="sy" src="img/ico/force.png" alt="force"><img class="sy" src="img/ico/diplomacy.png" alt="diplomacy"></div><div class="b">+2 ♛</div></div>
+      </div>
+    </div>
+    <div class="lab">Links <b>ein</b> Symbol im Feld (Liberty): <b>Favored</b>.<br><br>Rechts <b>zwei</b> Symbole derselben Achse in einem Feld (Force und Diplomacy): <b>Balanced</b>.<br><span class="muted" style="font-size:8pt">Nachgezeichnet, die echte Karte sieht etwas anders aus.</span></div>
+  </div>
+  <div class="board">
+    <div class="brow"><div class="n">Tradition<i></i></div><div class="tr"><span></span><span></span><span class="s"></span><span class="s on"></span><span class="s"></span><span></span><span></span></div><div class="n r">Progress<i></i></div></div>
+    <div class="brow hl"><div class="n">Force<i>●</i></div><div class="tr"><span></span><span></span><span class="s"></span><span class="s on"></span><span class="s"></span><span></span><span></span></div><div class="n r">Diplomacy<i></i></div></div>
+    <div class="brow hl"><div class="n">Order<i></i></div><div class="tr"><span></span><span></span><span class="s"></span><span class="s"></span><span class="s on"></span><span></span><span></span></div><div class="n r">Liberty<i>●●●</i></div></div>
+  </div>
+  <p>Lyries Karte hat zwei Ziele: <b>Favored Liberty</b> mit Bonus +3 und <b>Balanced Force/Diplomacy</b> mit Bonus +2.</p>
+  <ul class="small">
+    <li><b>Liberty:</b> 3 Hegemony tokens (<span style="color:#b8912e">●</span>), weil Liberty in diesem Spiel drei Abstimmungen gewonnen hat. Der Schieber steht auf der Liberty-Seite. Das gibt 3 + 3 = 6 Hegemony-Punkte.</li>
+    <li><b>Force/Diplomacy:</b> Force hat 1 Token, Diplomacy keinen. Gezählt wird die Seite mit weniger Tokens, also 0. Für 0 Tokens gibt es als Trost 1 Independence. Der Schieber steht in der silbernen Zone, das gibt den Bonus von 2 Hegemony-Punkten.</li>
+  </ul>
+  <p class="small"><b>Zusammen: 8 Hegemony-Punkte und 1 Independence.</b> Der Trost gilt bei jedem Ziel, dessen gezählte Seite keinen Token hat.</p>
+  <div class="folio">6</div>
+</section>
+
+<!-- 6 · EVENING SETUP -->
+<section class="page" id="abend">
+  <h2>Ein Spiel</h2>
+  <div class="sub">Vorbereiten, abstimmen, abrechnen</div>
+  <div class="step"><div class="num">1</div><div><h4>Vorbereiten</h4><p>Jeder zieht verdeckt zwei Ideology cards und behält die mit der höheren Zahl. Wählen darfst du nicht.</p></div></div>
+  <ul class="small" style="margin-left:9.4mm">
+    <li>Alle erhalten <b>7 Power</b>, je 1 Gold, Food, Army und Materials und dazu den Ertrag ihrer Provinzen.</li>
+    <li>In den Topf (<span class="t">Power Pool</span>) kommen 3 Power.</li>
+    <li>Dann kommen <span class="t">Chronicle cards</span> ins Spiel, Spätfolgen alter Beschlüsse.</li>
+    <li>Zuletzt wählt jeder eine <span class="t">Investment card</span>. Sie sagt, welche Ressource du am Spielende anlegen kannst und was es bringt. Wie viel du zahlen musst, zeigt die Timeline. Zahlst du nicht, gibt es eine Strafe.</li>
+  </ul>
+  <div class="box small"><b><span class="t">Agenda cards</span></b> sind deine geheimen Ziele über mehrere Spiele, aus der Geschichte deiner Figur. Die ersten bekommst du im ersten Spiel. Weitere bringen deine Geschichte und manche Beschlüsse. Jede hat eine Frist, und bezahlt wird am Spielende.</div>
+  <div class="folio">7</div>
+</section>
+
+<!-- 7 · EVENING ROUNDS -->
+<section class="page" id="runden">
+  <h2>Ein Spiel</h2>
+  <div class="sub">Dann 7 bis 9 Dilemmas, eines nach dem anderen</div>
+  <div class="rounds" style="margin-top:1mm">
+    <div class="step"><div class="num">a</div><div><h4>Vorlesen</h4><p>Ein Dilemma ziehen und vorlesen. Die Rückseite bleibt verborgen.</p></div></div>
+    <div class="step"><div class="num">b</div><div><h4>Abstimmen</h4><p>Feilschen, Power setzen, passen (<a href="#abstimmung">Seite 10</a>).</p></div></div>
+    <div class="step"><div class="num">c</div><div><h4>Folgen</h4><p>Karte umdrehen, Folgen der Siegerseite vorlesen: Schieber bewegen sich, Spieler gewinnen oder verlieren etwas, ein Umschlag geht vielleicht auf.</p></div></div>
+    <div class="again">↻ nächstes Dilemma</div>
+  </div>
+  <p class="small">Manche Dilemmas tragen auf der Rückseite eine Sanduhr. Landet so eines auf Platz 7, 8 oder 9, endet das Spiel. Nach dem neunten ist ohnehin Schluss.</p>
+  <div class="step" style="margin-top:1mm"><div class="num">2</div><div><h4>Abrechnen</h4><p>Ideology cards aufdecken und werten. Wer am meisten Power übrig hat, bekommt 2 Independence, wer am zweitmeisten hat, 1. Dann Investments und Agendas bezahlen, zuletzt Steuern. Power verfällt, und das Ideology board beginnt neu.</p></div></div>
+  <div class="folio">8</div>
+</section>
+
+<!-- 7 · A DILEMMA -->
+<section class="page" id="dilemma">
+  <h2>Ein Dilemma</h2>
+  <div class="sub">So sieht eine Frage an den Rat aus</div>
+  <div class="dcard">
+    <div class="hd"><span>DILEMMA</span><span>ERFUNDENES BEISPIEL</span></div>
+    <div class="tx">Die Kaufleute von <span class="kw">Wylio</span> verlangen, ihre Preise künftig selbst festzulegen. In der Hauptstadt warnt man vor Wucher. Soll der Rat den Gilden die Freiheit gewähren?</div>
+    <div class="opts"><div class="a"><b>AYE</b><img class="syw" src="img/ico/liberty.png" alt="liberty"><img class="syw" src="img/ico/progress.png" alt="progress"> Liberty, Progress</div><div class="n"><b>NAY</b><img class="syw" src="img/ico/order.png" alt="order"><img class="syw" src="img/ico/unsure.png" alt="unsure"> Order, Effekt ?</div></div>
+  </div>
+  <p>Auf der Vorderseite steht nur die <b>Vorschau</b>: welche Ideologien bei <span class="aye">Aye</span> und bei <span class="nay">Nay</span> vorrücken, und ob ein bleibender Effekt folgt, gut <img class="syi" src="img/ico/plus.png" alt="plus">, schlecht <img class="syi" src="img/ico/minus.png" alt="minus"> oder ungewiss <img class="syi" src="img/ico/unsure.png" alt="unsure">. Wie weit die Schieber rücken, steht erst auf der Rückseite. Dort können auch Folgen stehen, die vorne nicht angekündigt sind, etwa Ressourcen, Punkte oder neue Karten.</p>
+  <p><b>Hervorgehobene Wörter</b> sind <span class="t">Keywords</span>. Hier ist es eine Provinz. Gehört sie dir, trifft dich die Folge persönlich. Keywords können auch Figuren oder Stichworte aus deinem Diary sein. Hör genau hin, wenn deines fällt. Ob eine Folge den Leader trifft, steht erst auf der Rückseite.</p>
+  <div class="box small"><b>Wer was will:</b> Wer heute Liberty favorisiert, stimmt für Aye. Wem Wylio gehört, fürchtet, was auf der Rückseite steht. Und wer Order braucht, bietet dir vielleicht 2 Food, damit du passt.</div>
+  <div class="folio">9</div>
+</section>
+
+<!-- 8 · VOTING 1 -->
+<section class="page" id="abstimmung">
+  <h2>Die Abstimmung</h2>
+  <div class="sub">Power ist deine Stimme</div>
+  <p>Wer den <span class="t">Leader token</span> hat, beginnt. Im ersten Spiel wird er ausgelost. Danach beginnt, wer ihn zuletzt behalten hat, auch im nächsten Spiel. Es geht im Uhrzeigersinn reihum, oft mehrmals. Bei deinem ersten Zug stimmst du ab oder passt.</p>
+  <div class="box"><h3 style="margin-top:0">Vote</h3><p class="small">Lege mindestens 1 Power auf dein <span class="t">Voting tile</span>, blau für <span class="aye">Aye</span> oder rot für <span class="nay">Nay</span>. In späteren Zügen darfst du nachlegen (<b>Raise</b>) oder abwarten (<b>Stay</b>). Die Seite wechseln oder passen kannst du nicht mehr.</p></div>
+  <div class="box"><h3 style="margin-top:0">Pass</h3><p class="small">Du bist für diese Abstimmung raus und wählst eine Aktion:</p>
+    <ul class="small" style="margin-bottom:0"><li><b>Gather Power:</b> Nach der Abstimmung teilst du dir mit allen, die das auch gewählt haben, was vor dieser Abstimmung im Topf lag. Ein Rest bleibt im Topf.</li><li><b>Become Moderator:</b> Du nimmst den <span class="t">Moderator token</span> und entscheidest ab jetzt jeden Gleichstand, bis ihn dir jemand abnimmt, auch über das Spiel hinaus.</li><li>eine Special Pass Action von einer Karte.</li></ul></div>
+  <div class="folio">10</div>
+</section>
+
+<!-- 9 · VOTING 2 -->
+<section class="page" id="fuehrung">
+  <h2>Wer führt, verlängert</h2>
+  <div class="sub">Der Leader token wandert</div>
+  <p>Hast du nach deinem Zug allein am meisten Power auf deinem Voting tile, nimmst du sofort den Leader token, egal für welche Seite. Die Abstimmung endet nach dem Zug des Spielers <b>rechts vom Leader</b>. Der Leader selbst kommt also nicht mehr an die Reihe, und jeder neue Leader schiebt das Ende hinaus.</p>
+  <div class="box small"><b>Beispiel:</b> Anna, Beat, Corina und Dario sitzen im Uhrzeigersinn. Anna ist Leader, beginnt und legt 1 Power. Beat legt 2 und wird Leader. Jetzt sind noch Corina, Dario und Anna dran. Nimmt keiner Beat den Leader token ab, endet die Abstimmung nach Anna. Beat kommt nicht mehr dran.</div>
+  <p>Dann gewinnt die Seite mit mehr Power. Bei Gleichstand entscheidet der Moderator. Steht der Leader auf der Verliererseite, geht der Leader token an den Gewinner mit der meisten Power. <b>Wer am Schluss Leader ist, muss mit den Folgen leben:</b> Viele davon treffen den Leader direkt.</p>
+  <div class="key"><span class="big">Gewinnen kostet, Verlieren ist gratis</span>
+    <div class="cost">
+      <div><b>Gewonnen:</b> Deine Power geht in den Topf.</div>
+      <div><b>Verloren:</b> Du bekommst deine Power zurück.</div>
+    </div>
+  </div>
+  <div class="folio">11</div>
+</section>
+
+<!-- 10 · BARGAINING -->
+<section class="page" id="feilschen">
+  <h2>Feilschen</h2>
+  <div class="sub">Am Ratstisch ist alles käuflich, fast</div>
+  <p>Während der Abstimmung darfst du offen verhandeln, drohen und bestechen. Bezahlt wird mit <b>Ressourcen</b>, und zwar für eine <b>Gegenleistung</b>: eine Stimme, ein Pass, der Entscheid des Moderators bei Gleichstand.</p>
+  <ul>
+    <li>Ein Deal ist bindend, sobald die Ressourcen angenommen sind, auch wenn die Gegenleistung erst später fällig ist.</li>
+    <li>Ein Versprechen ohne Ressourcen bindet niemanden. Bluffen ist erlaubt.</li>
+    <li>Deals dürfen auch über mehrere Spiele laufen. Notiert sie im Diary.</li>
+    <li><b>Verboten:</b> Ressourcen gegen Ressourcen tauschen, Power weitergeben, den Leader token oder den Moderator token handeln.</li>
+  </ul>
+  <div class="folio">12</div>
+</section>
+
+<!-- 11 · RESOURCES -->
+<section class="page" id="ressourcen">
+  <h2>Ressourcen &amp; Provinzen</h2>
+  <div class="sub">Was von Spiel zu Spiel bleibt</div>
+  <p><b>Gold, Food, Army</b> und <b>Materials</b> bleiben von Spiel zu Spiel liegen. Du brauchst sie für Investments, Agendas, Steuern und für Kosten, die dir Dilemmas auferlegen.</p>
+  <ul class="small">
+    <li>Mit <b>2 Gold</b> kannst du jederzeit <b>1 beliebige</b> andere Ressource bezahlen.</li>
+    <li>Verlangt eine Folge, dass du zahlst, und du kannst oder willst nicht, nimmst du für jede fehlende Ressource <b>1 Infamy</b>. Investments und Agendas gehen nur gegen volle Bezahlung.</li>
+    <li>Steuern zahlst du immer: Am Spielende gibst du die Hälfte einer Ressourcenart ab, aufgerundet. Welche, zeigt die <b>Timeline</b> auf der Landkarte. Hast du 5 Food und Food wird besteuert, gibst du 3 ab.</li>
+  </ul>
+  <h3>Deine Provinzen</h3>
+  <p class="small">Im ersten Spiel wählt jedes Haus zwei der zwölf Provinzen (<span class="t">Regions</span>). Was eine Provinz liefert, steht auf der Landkarte unter ihrem Namen. Ihre Gebäude liefern nur in Spielen ihrer Farbe, rot oder blau, und die Farben wechseln sich ab. Haben deine beiden Provinzen dieselbe Farbe, folgen fette auf magere Spiele.</p>
+  <div class="folio">13</div>
+</section>
+
+<!-- 14 · TIPS -->
+<section class="page" id="tipps">
+  <h2>Drei Ratschläge</h2>
+  <div class="sub">für das erste Spiel</div>
+  <ol>
+    <li><b>Power ist dein Budget für das ganze Spiel.</b> Wer sie in der ersten Abstimmung verpulvert, schaut bei den nächsten zu. Wie viele Dilemmas kommen, weiss niemand: Ab dem siebten kann jedes das letzte sein. Passen ist oft der stärkste Zug.</li>
+    <li><b>Hör jedem Dilemma bis zum letzten Satz zu.</b> Der Text deutet Folgen an, die in der Vorschau nicht stehen.</li>
+    <li><b>Behalte den Leader token im Auge.</b> Wer ihn nach der Abstimmung hält, wird belohnt oder muss büssen. Manchmal willst du gewinnen, ohne ihn zu haben.</li>
+  </ol>
+  <p class="sign push">Die übrigen Regeln erklärt die Spielleitung am Tisch,<br>den Rest lernen wir beim Spielen.</p>
+  <div class="folio">14</div>
+</section>
+
+<!-- 15 · SELF-CHECK -->
+<section class="page" id="check">
+  <h2>Kannst du es erklären?</h2>
+  <div class="sub">Sechs Fragen, bevor es losgeht</div>
+  <ol class="qa">
+    <li>Du legst 3 Power auf Aye, und Aye gewinnt. Wo ist deine Power jetzt?</li>
+    <li>Du legst Power und nimmst damit den Leader token. Kommst du in dieser Abstimmung noch einmal dran?</li>
+    <li>Deine Karte favorisiert Liberty. Liberty gewinnt zwei Abstimmungen, liegt am Spielende aber nicht vorne. Was bekommst du?</li>
+    <li>Du hast 2 Power auf Nay gelegt. Jetzt möchtest du doch lieber passen und Power sammeln. Geht das?</li>
+    <li>Du bietest einer Mitspielerin 2 Gold für 2 Food. Ist das erlaubt?</li>
+    <li>Eine Folge verlangt 3 Food von dir, du hast aber nur 2. Was passiert?</li>
+  </ol>
+  <p class="small muted push" style="text-align:center">Die Antworten stehen auf der nächsten Seite.</p>
+  <div class="folio">15</div>
+</section>
+
+<section class="page" id="antworten">
+  <h2>Antworten</h2>
+  <div class="sub">Und wo es steht</div>
+  <ol class="qa small">
+    <li>Im Topf. Wer später Gather Power wählt, teilt ihn sich (<a href="#abstimmung">Seite 10</a>).</li>
+    <li>Nein, ausser jemand nimmt dir den Leader token ab (<a href="#fuehrung">Seite 11</a>).</li>
+    <li>2 Hegemony-Punkte für die zwei Tokens, aber keinen Bonus (<a href="#idcard">Seite 5</a>).</li>
+    <li>Nein. Wer abgestimmt hat, kann nicht mehr passen, nur noch nachlegen oder abwarten (<a href="#abstimmung">Seite 10</a>).</li>
+    <li>Nein. Ressourcen gegen Ressourcen tauschen ist verboten. Ressourcen gibt es nur für eine Gegenleistung, etwa eine Stimme oder einen Pass (<a href="#feilschen">Seite 12</a>).</li>
+    <li>Du zahlst die 2 Food und nimmst 1 Infamy für das fehlende. Oder du ersetzt das fehlende Food durch 2 Gold (<a href="#ressourcen">Seite 13</a>).</li>
+  </ol>
+  <div class="folio">16</div>
+</section>
+
+<!-- 16 · GLOSSARY A -->
+<section class="page" id="woerterbuch">
+  <h2>Wörterbuch</h2>
+  <div class="sub">A bis I · Zahl = Seite</div>
+  <dl class="gl">
+    <dt>Agenda card <a class="pg" href="#abend">7</a></dt><dd>Dein geheimes Ziel über mehrere Spiele. Die Zahl unten ist das letzte Spiel dafür. Erfüllst du es bis dahin, gibt es Lohn, sonst eine Strafe.</dd>
+    <dt>Become Moderator</dt><dd>→ Pass</dd>
+    <dt>Chronicle card <a class="pg" href="#abend">7</a></dt><dd>Spätfolge eines Beschlusses. Ändert Regeln oder bringt neue Aktionen.</dd>
+    <dt>Diary <a class="pg" href="#punkte">3</a></dt><dd>Das Tagebuch deines Hauses, mit deinen Punkten und Keywords.</dd>
+    <dt>Dilemma <a class="pg" href="#dilemma">9</a></dt><dd>Eine Frage an den Rat, mit den Antworten Aye oder Nay.</dd>
+    <dt>Ending sticker <a class="pg" href="#punkte">3</a></dt><dd>Kommt auf die Landkarte, wenn ein Handlungsstrang endet. Seine Waagen zeigen, wie stabil das Reich ist.</dd>
+    <dt>Favored / Balanced</dt><dd>→ Ideology card</dd>
+    <dt>Gather Power <a class="pg" href="#abstimmung">10</a></dt><dd>Passen und nach der Abstimmung mit allen, die das auch wählen, teilen, was vorher im Topf lag.</dd>
+    <dt>Hegemony / Independence / Infamy <a class="pg" href="#punkte">3</a></dt><dd>Ansehen bei der Krone / eigene Macht / schlechter Ruf.</dd>
+    <dt>Hegemony token <a class="pg" href="#ideologien">4</a></dt><dd>Marke auf dem Ideology board. Jede Ideologie der siegreichen Seite bekommt eine.</dd>
+    <dt>Ideology board <a class="pg" href="#ideologien">4</a></dt><dd>Brett mit drei Achsen. Auf jeder steht ein Schieber (Slider), zu Beginn in der Mitte. Die drei mittleren Felder sind silbern.</dd>
+  </dl>
+  <div class="folio">17</div>
+</section>
+
+<!-- 17 · GLOSSARY B -->
+<section class="page">
+  <h2>Wörterbuch</h2>
+  <div class="sub">I bis Z · Zahl = Seite</div>
+  <dl class="gl">
+    <dt>Ideology card <a class="pg" href="#idcard">5</a></dt><dd>Dein geheimes Ziel für ein Spiel: Favored oder Balanced.</dd>
+    <dt>Investment card <a class="pg" href="#abend">7</a></dt><dd>Sagt, welche Ressource du am Spielende anlegen kannst. Zahlst du nicht, gibt es die Strafe.</dd>
+    <dt>Keyword <a class="pg" href="#dilemma">9</a></dt><dd>Hervorgehobenes Wort. Ist es deines, trifft es dich.</dd>
+    <dt>Leader token <a class="pg" href="#abstimmung">10</a></dt><dd>Wer ihn hält, beginnt die Abstimmung und trägt viele Folgen.</dd>
+    <dt>Moderator token <a class="pg" href="#abstimmung">10</a></dt><dd>Wer ihn hält, entscheidet jeden Gleichstand.</dd>
+    <dt>Pass <a class="pg" href="#abstimmung">10</a></dt><dd>Aussteigen statt abstimmen, dafür Gather Power, Become Moderator oder eine Kartenaktion.</dd>
+    <dt>Power / Power Pool <a class="pg" href="#abend">7</a></dt><dd>Deine Stimmkraft, 7 pro Spiel / der Topf in Aontas.</dd>
+    <dt>Provinz (Region) <a class="pg" href="#ressourcen">13</a></dt><dd>Eine der zwölf Provinzen. Zwei davon gehören dir.</dd>
+    <dt>Raise / Stay <a class="pg" href="#abstimmung">10</a></dt><dd>Nachlegen / abwarten.</dd>
+    <dt>Slider</dt><dd>→ Ideology board</dd>
+    <dt>Timeline <a class="pg" href="#ressourcen">13</a></dt><dd>Leiste auf der Landkarte: welches Spiel, welche Farbe liefert, was ein Investment kostet, was besteuert wird.</dd>
+    <dt>Umschlag (Envelope) <a class="pg" href="#runden">8</a></dt><dd>Versiegelt. Geht auf, wenn eine Karte es befiehlt.</dd>
+    <dt>Voting tile <a class="pg" href="#abstimmung">10</a></dt><dd>Dein Plättchen: Vorderseite blau/rot zum Abstimmen, Rückseite zum Passen.</dd>
+  </dl>
+  <div class="folio">18</div>
+</section>
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>

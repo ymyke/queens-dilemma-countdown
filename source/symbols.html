@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Die Symbole</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Alegreya:ital,wght@0,400;0,700;1,400&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=block" rel="stylesheet">
+<style>
+@page { size: 210mm 297mm; margin: 0; }
+:root { --paper: #f3ead6; --paper2: #e9dabb; --ink: #2b2118; --muted: #5f4f3c; --red: #8c2320; --gold: #7a5c1e; --goldl: #b8912e; --line: #cdb88c; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; color: var(--ink); font-family: "Alegreya Sans", sans-serif; font-size: 10pt; line-height: 1.24; background: var(--paper); }
+.page { width: 210mm; height: 297mm; padding: 10mm 11mm 9mm; position: relative; overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 30%, #f8f1e0 0%, var(--paper) 55%, var(--paper2) 100%); }
+.page::before { content: ""; position: absolute; inset: 5mm; border: .7pt solid var(--line); pointer-events: none; }
+.page { break-after: page; } .page:last-of-type { break-after: auto; }
+.folio { position: absolute; bottom: 5.4mm; left: 0; right: 0; text-align: center; font-family: Cinzel, serif; font-size: 7pt; letter-spacing: .1em; color: var(--muted); }
+.page.over { outline: 3mm solid magenta; outline-offset: -3mm; }
+header { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: .9pt solid var(--goldl); padding-bottom: 1.8mm; margin-bottom: 3mm; }
+.eyebrow { font-family: Cinzel, serif; letter-spacing: .26em; font-size: 7.4pt; color: var(--gold); font-weight: 700; }
+h1 { font-family: Cinzel, serif; font-weight: 900; color: var(--red); font-size: 21pt; margin: .6mm 0 0; line-height: 1; }
+.tag { font-family: Alegreya, serif; font-style: italic; color: var(--muted); font-size: 9.4pt; text-align: right; line-height: 1.25; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; flex: 1; }
+.col { display: flex; flex-direction: column; }
+h2 { font-family: Cinzel, serif; font-size: 11pt; color: var(--red); margin: 0 0 1.2mm; letter-spacing: .03em; display: flex; align-items: baseline; gap: 2mm; }
+h2 small { font-family: Alegreya, serif; font-style: italic; font-weight: 400; color: var(--muted); font-size: 8.6pt; letter-spacing: 0; }
+section { margin-bottom: 2.8mm; }
+.kw { background: rgba(255,255,255,.45); border: .5pt solid var(--line); border-left: 1.2mm solid var(--red); border-radius: 0 2mm 2mm 0; padding: 2mm 3mm; margin-bottom: 0; }
+.kw p { margin: 0 0 1mm; } .kw ul { margin: 0 0 1mm; padding-left: 4mm; } .kw li { margin: 0 0 .4mm; }
+.grid { display: grid; gap: 1.2mm; }
+.g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; } .g3 .it { grid-template-columns: 8mm 1fr; gap: 1.6mm; padding: 1.1mm 1.4mm; }
+.it { display: grid; grid-template-columns: 10.5mm 1fr; align-items: center; gap: 2.2mm; background: rgba(255,255,255,.45); border: .5pt solid var(--line); border-radius: 1.6mm; padding: 1.1mm 1.8mm; min-height: 10mm; }
+.it .i { display: flex; align-items: center; justify-content: center; }
+.it img { max-width: 9.5mm; max-height: 8.4mm; }
+.it.w { grid-template-columns: 19mm 1fr; }
+.it.w img { max-width: 18mm; max-height: 8.6mm; }
+.it b { font-weight: 800; }
+.it span { display: block; color: var(--muted); font-size: 10pt; line-height: 1.24; }
+.sm img { max-width: 7.6mm; max-height: 7.6mm; }
+.note { font-size: 9.2pt; color: var(--muted); margin: 1.2mm 0 0; }
+.tg .it.w { grid-template-columns: 12mm 1fr; } .tg .it.w img { max-width: 11.5mm; }
+.it em { font-style: normal; font-weight: 800; color: var(--red); }
+.note .chip, .chip { display: inline-block; width: 3.4mm; height: 3.4mm; border-radius: .7mm; vertical-align: -.5mm; margin-right: .6mm; border: .4pt solid rgba(0,0,0,.25); }
+.txtic { font-family: "Alegreya Sans", sans-serif; font-weight: 800; font-size: 13pt; color: var(--ink); white-space: nowrap; }
+.it.w img.dark { border-radius: 1.2mm; }
+.it .i span.txtic { display: inline; font-size: 12pt; color: var(--ink); font-weight: 800; }
+.it .i span.chip, .it .i span.txtic span.note .chip, .chip { display: inline-block; }
+.key { background: rgba(255,255,255,.55); border-left: 1.2mm solid var(--red); border-radius: 0 2mm 2mm 0; padding: 1.4mm 2.4mm; margin-top: 1.2mm; font-size: 8.6pt; }
+</style></head>
+<body>
+<section class="page">
+  <header>
+    <div>
+      <div class="eyebrow">THE QUEEN'S DILEMMA · SPIELHILFE</div>
+      <h1>Die Symbole</h1>
+    </div>
+    <div class="tag">Aus dem Regelheft (S. 41–49),<br>kurz erklärt</div>
+  </header>
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2>Ideologien</h2>
+        <div class="grid g3">
+          <div class="it"><div class="i"><img src="img/sym/tradition.png"></div><div><b>Tradition</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/progress.png"></div><div><b>Progress</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/force.png"></div><div><b>Force</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/diplomacy.png"></div><div><b>Diplomacy</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/order.png"></div><div><b>Order</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/liberty.png"></div><div><b>Liberty</b></div></div>
+        </div>
+        <p class="note">Je zwei stehen sich auf einer Leiste gegenüber: Tradition gegen Progress, Force gegen Diplomacy, Order gegen Liberty.</p>
+        <div class="grid" style="margin-top:1.2mm">
+          <div class="it"><div class="i"><img src="img/sym/bal_tp.png"></div><div><b>Balanced</b><span>Doppelsymbol auf manchen Ideology cards: Diese Leiste soll in der Mitte bleiben, auf den 3 silbernen Feldern.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/push.png"></div><div><b>Ideology Push</b><span>Den Schieber so viele Felder Richtung dieser Ideologie schieben und 1 Hegemony token an ihr Ende der Leiste legen.</span></div></div>
+        </div>
+      </section>
+      <section>
+        <h2>Punkte, Power, Ressourcen</h2>
+        <div class="grid g2 sm">
+          <div class="it"><div class="i"><img src="img/sym/hegemony.png"></div><div><b>Hegemony</b><span>Punkte: Ansehen bei Krone und Reich</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/independence.png"></div><div><b>Independence</b><span>Punkte: eigener Einfluss</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/infamy.png"></div><div><b>Infamy</b><span>Minuspunkte: schlechter Ruf</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/power.png"></div><div><b>Power</b><span>zum Abstimmen</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/gold.png"></div><div><b>Gold</b><span>2 Gold = 1 andere Ressource</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/materials.png"></div><div><b>Materials</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/food.png"></div><div><b>Food</b></div></div>
+          <div class="it"><div class="i"><img src="img/sym/army.png"></div><div><b>Army</b></div></div>
+        </div>
+      </section>
+      <section>
+        <h2>Gebäude</h2>
+        <div class="grid g3 sm">
+          <div class="it"><div class="i"><img src="img/sym/b_commercial.png"></div><div><b>Commercial</b><span>Handel</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/b_military.png"></div><div><b>Military</b><span>Militär</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/b_welfare.png"></div><div><b>Welfare</b><span>Fürsorge</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/b_entertainment.png"></div><div><b>Entertainment</b><span>Vergnügen</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/b_corruption.png"></div><div><b>Corruption</b><span>Korruption</span></div></div>
+        </div>
+        <p class="note">Die Typen haben keine eigenen Regeln, Karten beziehen sich auf sie. Auch das Grundgebäude jeder Region zählt. Ein Gebäude produziert nur in Spielen seiner Farbe <span class="chip" style="background:#a3271f"></span><span class="chip" style="background:#1f4f8a"></span> (siehe Timeline). Steht «/» zwischen zwei Ressourcen, wählt der Besitzer jedes Mal eine davon.</p>
+      </section>
+      
+    </div>
+    <div class="col">
+      <section>
+        <h2>Vorne auf dem Dilemma</h2>
+        <div class="it w"><div class="i" style="gap:1mm"><img src="img/sym/plus.png" style="max-width:5mm"><img src="img/sym/minus.png" style="max-width:5mm"><img src="img/sym/unsure.png" style="max-width:5mm"></div><div><b>Positiv, negativ, ungewiss</b><span>Diese Seite bringt eine bleibende Folge, etwa einen Sticker oder eine Karte. Das Symbol gehört nicht zur Ideologie daneben. Wen es trifft, verrät höchstens der Text.</span></div></div>
+      </section>
+      <section>
+        <h2>Was freigeschaltet wird <small>Symbol und Code, Nummern als Beispiel</small></h2>
+        <div class="grid g2 sm">
+          <div class="it"><div class="i"><img src="img/sym/envelope.png"></div><div><b>Envelope</b><span><em>✉ 12</em> · Umschlag öffnen</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/mystery.png"></div><div><b>Mystery box</b><span><em>M05</em> · Schachtel öffnen</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/keyword.png"></div><div><b>Keyword sticker</b><span><em>K12</em> · ins Diary</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/skill.png"></div><div><b>Skill sticker</b><span><em>S12</em> · ins Diary</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/chronicle.png"></div><div><b>Chronicle card</b><span><em>C127</em> · frühestens im nächsten Spiel</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/agenda.png"></div><div><b>Agenda card</b><span><em>A027</em> · geheimes Ziel. Mit ∞: ohne Frist</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/building.png"></div><div><b>Building sticker</b><span><em>B12</em> · auf die Map</span></div></div>
+          <div class="it"><div class="i"><img src="img/sym/end.png"></div><div><b>Ending sticker</b><span><em>END03</em> · Ende einer Storyline</span></div></div>
+        </div>
+      </section>
+      <section>
+        <h2>Weitere</h2>
+        <div class="grid">
+          <div class="it w"><div class="i"><img src="img/sym/sand.png"></div><div><b>Sanduhr</b><span>Rückseite eines Dilemmas: Landet es auf Platz 7, 8 oder 9 des Round Counter, endet das Spiel nach dieser Karte.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/bag.png"></div><div><b>Beutel</b><span>Auf Investment und Agenda cards: so viele Ressourcen, wie im Feld des Spiels auf der Timeline steht.</span></div></div>
+          <div class="it w"><div class="i"><img class="dark" src="img/sym/scales.png"></div><div><b>Waagen</b><span>Auf Ending stickers: 0 bis 2 goldene Waagen zeigen, wie stabil das Reich danach ist.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/story.png"></div><div><b>Storylines</b><span>Zeichen jeder Geschichte, auf Story cards, Ending sticker und Map. Gold auf Schwarz: ihr Ende.</span></div></div>
+        </div>
+      </section>
+      <section class="kw" style="margin-top:auto">
+        <h2>Wen trifft es? <small>Keywords</small></h2>
+        <p>Vor einem Effekt steht meist ein Keyword, etwa <b>«Leader: C127»</b>. Dann trifft der Effekt nur, wer dazu passt:</p>
+        <ul>
+          <li><b>Players:</b> alle, auch wer gepasst hat</li>
+          <li><b>Winners:</b> wer auf der Siegerseite gevotet hat. Haben alle gepasst, der Moderator.</li>
+          <li><b>Leader, Moderator:</b> wer den Token hat</li>
+          <li><b>Figur oder Region</b>, etwa Jilian oder Wylio: wem sie gehört</li>
+          <li><b>Andere Keywords:</b> wer den Sticker im Diary hat</li>
+        </ul>
+        <p class="note" style="margin:0">Ohne Keyword trifft es, wer die Aktion macht, bei Agenda cards also ihren Besitzer, sofern nichts anderes steht.</p>
+      </section>
+      
+      
+      
+    </div>
+  </div>
+  <div class="folio">1 / 2 · inoffiziell · Symbole © Horrible Games SRL</div>
+</section>
+<section class="page">
+  <header>
+    <div>
+      <div class="eyebrow">THE QUEEN'S DILEMMA · SPIELHILFE</div>
+      <h1>Chronicle cards</h1>
+    </div>
+    <div class="tag">Aus dem Regelheft (S. 41–49),<br>kurz erklärt</div>
+  </header>
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2>Auf Chronicle cards</h2>
+        <div class="grid">
+          <div class="it w"><div class="i" style="gap:.6mm"><span class="chip" style="background:#9cc6dd"></span><span class="chip" style="background:#e3b23c"></span><span class="chip" style="background:#1d3557"></span></div><div><b>Farbiges Band</b><span>Wann die Karte wirkt: hellblau beim Aufbau, gelb während des Spiels, dunkelblau am Spielende. Darauf steht die genaue Phase.</span></div></div>
+          <div class="it w"><div class="i"><span class="txtic">−2 ➜ +2</span></div><div><b>Pfeil</b><span>Links zahlen, rechts bekommen. Im Regelheft nicht erklärt, aus den Beispielen gelesen.</span></div></div>
+          <div class="it w"><div class="i"><span class="txtic">∞</span></div><div><b>Feld mit ∞</b><span>Auf diesem Pass Action space dürfen beliebig viele Heraldry tokens liegen.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/win.png"></div><div><b>Win</b><span>Wirkt, wenn der Schieber auf der Seite dieser Ideologie steht.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/max.png"></div><div><b>Max</b><span>Wirkt, wenn er ganz am Ende ihrer Seite steht.</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/lose.png"></div><div><b>Lose</b><span>Wirkt, wenn er auf der Gegenseite steht.</span></div></div>
+        </div>
+        </section>
+      
+    </div>
+    <div class="col">
+      <section>
+        <h2>Wen sie trifft <small>Symbol links vom Effekt</small></h2>
+        <div class="grid tg">
+          <div class="it w"><div class="i"><img src="img/sym/t_players.png"></div><div><b>Alle</b></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/t_scoring.png"></div><div><b>Wer diese Ideologie als Favored hat</b><span>nicht Balanced</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/t_major.png"></div><div><b>Wer am meisten hat</b><span>bei Gleichstand alle Gleichauf</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/t_minor.png"></div><div><b>Wer am wenigsten hat</b><span>bei Gleichstand alle Gleichauf</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/t_build.png"></div><div><b>Wer mindestens so viele</b><span>Gebäude dieses Typs hat</span></div></div>
+          <div class="it w"><div class="i"><img src="img/sym/t_char.png"></div><div><b>Diese Figur</b><span>wie ein Keyword</span></div></div>
+        </div>
+      </section>
+      
+      
+      
+    </div>
+  </div>
+  <div class="folio">2 / 2 · inoffiziell · Symbole © Horrible Games SRL</div>
+</section>
+<script>
+document.fonts.ready.then(() => {
+  const o = [];
+  document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 1) { p.classList.add('over'); o.push((i+1) + ':' + (p.scrollHeight - p.clientHeight)); } });
+  document.querySelectorAll('.col').forEach((c, i) => { if (c.scrollHeight > c.clientHeight + 1) o.push('col' + (i+1) + ':' + (c.scrollHeight - c.clientHeight)); });
+  if (location.hash === '#check') document.title = o.length ? 'OVER' + o.join(',') : 'OK';
+});
+</script>
+</body></html>
